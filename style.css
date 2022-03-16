@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
 /* CSS RESET */
 
 *, *::before *::after{
@@ -12,7 +14,6 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: 'Old Standard TT', serif;
 }
 
 input, textarea, select {
@@ -20,6 +21,7 @@ input, textarea, select {
 }
 
 /* STYLE START */
+
 :root {
     --background: #000;
     --foreground: #d6d6d6;
@@ -37,6 +39,7 @@ input, textarea, select {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    font-family: 'Old Standard TT', serif;
 }
 #image{
     width: min(80%, 1000px);
