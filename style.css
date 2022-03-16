@@ -83,18 +83,3 @@ input, textarea, select {
 #searchbar:focus{
     outline: none;
 }
-/* CLASSES */
-
-/* ANIMATION */
-
-/* MOBILE SUPPORT */
-
-@media only screen and (max-width:500px) {
-
-    /* IDs */
-
-    /* CLASSES */
-
-    /* ANIMATION */
-
-}
