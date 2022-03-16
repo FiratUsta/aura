@@ -77,6 +77,9 @@ input, textarea, select {
     background-color: var(--background);
     color: var(--accent-one);
 }
+#searchbar:focus{
+    outline: none;
+}
 /* CLASSES */
 
 /* ANIMATION */
