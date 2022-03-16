@@ -1,0 +1,43 @@
+/* CSS RESET */
+*, *::before *::after{
+    box-sizing:border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html, body {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    /* font-family: 'Roboto Condensed', sans-serif; */
+}
+
+input, textarea, select {
+    font: inherit;
+}
+
+/* STYLE START */
+:root {
+    --background: #000;
+    --foreground: #fff;
+}
+
+/* IDs */
+
+/* CLASSES */
+
+/* ANIMATION */
+
+/* MOBILE SUPPORT */
+
+@media only screen and (max-width:500px) {
+
+    /* IDs */
+
+    /* CLASSES */
+
+    /* ANIMATION */
+
+}
