@@ -6,22 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+    </style> 
     <title>Startpage</title>
 </head>
 <body>
     <div id="main">
-        <div id="clockContainer">Th, Mar 17 | 00:00</div>
-        <div id="imageContainer"><img src="assets/image.jpg" alt="Don't you want to be lost?"></div>
+        <p id="clockContainer">Thu, Mar 17 | 00:00</p>
+        <img src="assets/image.jpg" alt="Don't you want to be lost?" id="image">
         <div id="linkContainer">
-            <a href="https://www.youtube.com/">Youtube</a>
-            <a href="https://www.reddit.com/">Reddit</a>
-            <a href="https://github.com/">GitHub</a>
-            <a href="https://web.telegram.org/">Telegram</a>
-            <a href="https://web.whatsapp.com/">WhatsApp</a>
-            <a href="https://itch.io/">Itch.io</a>
-            <a href="https://filelist.io/">Filelist</a>
+            <a href="https://www.youtube.com/" tabindex="-1">Youtube</a>
+            <a href="https://www.reddit.com/" tabindex="-1">Reddit</a>
+            <a href="https://github.com/" tabindex="-1">GitHub</a>
+            <a href="https://web.telegram.org/" tabindex="-1">Telegram</a>
+            <a href="https://web.whatsapp.com/" tabindex="-1">WhatsApp</a>
+            <a href="https://itch.io/" tabindex="-1">Itch.io</a>
+            <a href="https://filelist.io/" tabindex="-1">Filelist</a>
+            <a href="https://boards.4chan.org/wg/" tabindex="-1">/wg/</a>
         </div>
-        <div id="searchbarContainer"><input type="text" name="searchbar" id="searchbar"></div>
+        <div id="searchbarContainer">
+            <p id="searchbarDecoration">></p>
+            <input type="text" name="searchbar" id="searchbar" placeholder="Search term or command...">
+        </div>
     </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 /* CSS RESET */
+
 *, *::before *::after{
     box-sizing:border-box;
 }
@@ -11,7 +12,7 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    /* font-family: 'Roboto Condensed', sans-serif; */
+    font-family: 'Old Standard TT', serif;
 }
 
 input, textarea, select {
@@ -21,11 +22,61 @@ input, textarea, select {
 /* STYLE START */
 :root {
     --background: #000;
-    --foreground: #fff;
+    --foreground: #d6d6d6;
+    --accent-one: #fff;
 }
 
 /* IDs */
-
+#main{
+    height: 100%;
+    width: 100%;
+    background-color: var(--background);
+    color: var(--accent-one);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+#image{
+    width: min(80%, 1000px);
+    border: 5px double var(--foreground);
+}
+#linkContainer{
+    width: min(80%, 1000px);
+    display: flex;
+    justify-content: space-around;
+}
+#linkContainer a{
+    color: var(--accent-one);
+    text-decoration: none;
+}
+#linkContainer a:hover{
+    text-decoration: underline;
+}
+#searchbarContainer{
+    width: min(80%, 1000px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+#searchbarDecoration{
+    width: 2%;
+    height: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 2px solid var(--foreground);
+    user-select: none;
+}
+#searchbar{
+    width: 98%;
+    height: 20px;
+    margin-top: 50px;
+    border: none;
+    border-bottom: 2px solid var(--foreground);
+    background-color: var(--background);
+    color: var(--accent-one);
+}
 /* CLASSES */
 
 /* ANIMATION */
