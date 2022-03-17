@@ -1,7 +1,12 @@
 // Global Vars
 let settings = {
     "searchEngine": "google",
-    "clockMode": "24"
+    "searchbarPlaceholder": "Enter command or search term...",
+    "clockMode": "24",
+    "background": "#000",
+    "foreground": "#fff",
+    "accent": "#d6d6d6",
+    "image": "Assets/default.jpg"
 };
 
 let links = [
@@ -19,16 +24,21 @@ let links = [
 const searchLogic = (() => {
     // DOM Vars
     const searchBar = document.getElementById("searchbar");
-    const errorMsg = document.getElementById("errorMessage")
+    const searchBarDecoration = document.getElementById("searchbarDecoration");
+    const errorMsg = document.getElementById("errorMessage");
+
 
     // DOM Methods
     searchBar.onkeydown = (event) => onKey(event);
 
-    const _cmdParser = function(input, startIndex){
+    // Utility Vars
+    let cmdMode = false;
+
+    const _cmdParser = function(input, startIndex, endIndex = 1){
         let parsed = "";
-        for(let i = startIndex; i < input.length - 1; i++){
+        for(let i = startIndex; i < input.length - endIndex; i++){
             parsed += input[i];
-            if(i < input.length - 2){
+            if(i < input.length - 1 - endIndex){
                 parsed += " ";
             };
         };
@@ -36,9 +46,15 @@ const searchLogic = (() => {
     };
 
     const _cmdCheck = function(input){
-        if(/^sp:/.test(input)){
+        if(/^au:/.test(input) || cmdMode === true){
             let errorMessage = "";
-            const commandList = input.slice(3).split(" ");
+            let commandList;
+            if(cmdMode === true){
+                commandList = input.split(" ");
+            }
+            else{
+                commandList = input.slice(3).split(" ");
+            };
             if(commandList.length > 0){
                 switch(commandList[0]){
                     case "clock-mode":
@@ -53,14 +69,32 @@ const searchLogic = (() => {
 
                     case "search-engine":
                     case "se":
-                        switch(commandList[1]){
-                            case "duckduckgo":
-                            case "google":
-                                settings["searchEngine"] = commandList[1];
-                                break;
-                            default:
-                                errorMessage = "Missing or unrecognized search engine."
-                                break;
+                        if(commandList.length === 2){
+                            switch(commandList[1]){
+                                case "duckduckgo":
+                                case "google":
+                                    settings["searchEngine"] = commandList[1];
+                                    break;
+                                default:
+                                    errorMessage = "Missing or unrecognized search engine."
+                                    break;
+                            }
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[se || search-engine] <search engine>"'
+                        }
+                        break;
+                    
+                    case "search-placeholder":
+                    case "sp":
+                        if(commandList.length >= 2){
+                            const placeholder = _cmdParser(commandList, 1, 0);
+                            settings["searchbarPlaceholder"] = placeholder;
+                            DOMLogic.refresh();
+                            break;
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[sp || search-placeholder] <placeholder text>"'
                         }
                         break;
 
@@ -71,7 +105,7 @@ const searchLogic = (() => {
                             errorMessage = DOMLogic.addLink(linkName, commandList[commandList.length-1]);
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[la || link-add] <link name> <link URL>"'
+                            errorMessage = 'Usage: "au:[la || link-add] <link name> <link URL>"'
                         }
                         break;
 
@@ -87,7 +121,7 @@ const searchLogic = (() => {
                             };
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[lr || link-remove] <link index>"'
+                            errorMessage = 'Usage: "au:[lr || link-remove] <link index>"'
                         }
                         break;
 
@@ -104,7 +138,7 @@ const searchLogic = (() => {
                             };
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[ls || link-set] <link index> <link name> <link URL>"'
+                            errorMessage = 'Usage: "au:[ls || link-set] <link index> <link name> <link URL>"'
                         }
                         break;
 
@@ -126,36 +160,76 @@ const searchLogic = (() => {
                     case "color-background":
                     case "cb":
                         if(commandList.length === 2){
-                            document.documentElement.style.setProperty("--background", commandList[1]);   
+                            settings["background"] = commandList[1];
+                            DOMLogic.refresh();   
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[cb || color-background] <#color hex value>"'
+                            errorMessage = 'Usage: "au:[cb || color-background] <CSS color>"'
                         }
                         break;
 
                     case "color-foreground":
                     case "cf":
                         if(commandList.length === 2){
-                            document.documentElement.style.setProperty("--foreground", commandList[1]);   
+                            settings["foreground"] = commandList[1];
+                            DOMLogic.refresh();
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[cf || color-foreground] <#color hex value>"'
+                            errorMessage = 'Usage: "au:[cf || color-foreground] <CSS color>"'
                         }
                         break;
 
                     case "color-accent":
                     case "ca":
                         if(commandList.length === 2){
-                            document.documentElement.style.setProperty("--accent-one", commandList[1]);   
+                            settings["accent"] = commandList[1];
+                            DOMLogic.refresh();
                         }
                         else{
-                            errorMessage = 'Usage: "sp:[ca || color-accent] <#color hex value>"'
+                            errorMessage = 'Usage: "au:[ca || color-accent] <CSS color>"'
                         }
+                        break;
+                    
+                    case "image-set":
+                    case "is":
+                        if(commandList.length === 2){
+                            settings["image"] = commandList[1];
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[is || image-set] <image URL>"'
+                        }
+                        break;
+                    
+                    case "image-clear":
+                    case "ic":
+                        settings["image"] = "Assets/default.jpg";
+                        DOMLogic.refresh();
                         break;
 
                     case "message-clear":
                     case "mc":
                         errorMessage = "";
+                        break;
+
+                    case "terminal-mode":
+                    case "tm":
+                        cmdMode = !cmdMode;
+                        if(cmdMode === true){
+                            searchBarDecoration.innerText = "$";
+                            searchBarDecoration.style.fontSize = "16px";
+                            searchBar.setAttribute("placeholder","Enter command...");
+                        }
+                        else{
+                            searchBarDecoration.innerText = ">";
+                            searchBarDecoration.style.fontSize = "12px";
+                            searchBar.setAttribute("placeholder",settings["searchbarPlaceholder"]);
+                        };
+                        break;
+                    
+                    case "help":
+                    case "h":
+                        errorMessage = 'Please refer to the <a href="#">documentation</a> for help.'
                         break;
 
                     default:
@@ -164,9 +238,10 @@ const searchLogic = (() => {
                 }
             }
             else{
-                errorMessage = 'Usage: "sp:<command> <parameters>"'
+                errorMessage = 'Usage: "au:<command> <parameters>"'
             };
-            errorMsg.innerText = errorMessage;
+            errorMsg.innerHTML = errorMessage;
+            searchBar.focus();
         }
         else{
             _search(input);
@@ -257,8 +332,11 @@ const clock = (() => {
 const DOMLogic = (() => {
     //DOM Vars
     const linkContainer = document.getElementById("linkContainer");
+    const imageElement = document.getElementById("image");
+    const searchBar = document.getElementById("searchbar");
 
     const refresh = function () {
+        // Re-create links
         linkContainer.innerHTML = "";
         links.forEach(link => {
             newLink = document.createElement("a");
@@ -267,6 +345,14 @@ const DOMLogic = (() => {
             newLink.innerText = link[0];
             linkContainer.appendChild(newLink);
         });
+        // Set page colors
+        document.documentElement.style.setProperty("--background", settings["background"]);
+        document.documentElement.style.setProperty("--foreground", settings["foreground"]);
+        document.documentElement.style.setProperty("--accent-one", settings["accent"]);
+        // Set image
+        imageElement.setAttribute("src",settings["image"]);
+        // Set searchbar placeholder
+        searchBar.setAttribute("placeholder",settings["searchbarPlaceholder"])
     };
 
     const addLink = function (linkName, linkURL) {
