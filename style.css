@@ -1,39 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
-
 /* CSS RESET */
-
 *, *::before *::after{
     box-sizing:border-box;
 }
-
 * {
     margin: 0;
 }
-
 html, body {
     padding: 0;
     height: 100%;
     width: 100%;
 }
-
 input, textarea, select {
     font: inherit;
 }
-
 /* STYLE START */
-
 :root {
     --background: #000;
-    --foreground: #d6d6d6;
-    --accent-one: #fff;
+    --foreground: #fff;
+    --accent-one: #d6d6d6;
 }
-
+::selection{
+    color: var(--background);
+    background-color: var(--foreground);
+}
 /* IDs */
 #main{
     height: 100%;
     width: 100%;
     background-color: var(--background);
-    color: var(--accent-one);
+    color: var(--foreground);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,15 +39,15 @@ input, textarea, select {
 }
 #image{
     width: min(80%, 1000px);
-    border: 5px double var(--foreground);
+    border: 5px double var(--accent-one);
 }
 #linkContainer{
     width: min(80%, 1000px);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 #linkContainer a{
-    color: var(--accent-one);
+    color: var(--foreground);
     text-decoration: none;
 }
 #linkContainer a:hover{
@@ -68,7 +64,8 @@ input, textarea, select {
     height: 20px;
     font-weight: bold;
     font-size: 12px;
-    border-bottom: 2px solid var(--foreground);
+    color: var(--accent-one);
+    border-bottom: 2px solid var(--accent-one);
     user-select: none;
 }
 #searchbar{
@@ -76,10 +73,14 @@ input, textarea, select {
     height: 20px;
     margin-top: 50px;
     border: none;
-    border-bottom: 2px solid var(--foreground);
+    border-bottom: 2px solid var(--accent-one);
     background-color: var(--background);
-    color: var(--accent-one);
+    color: var(--foreground);
 }
 #searchbar:focus{
     outline: none;
+}
+#errorMessage{
+    color: red;
+    width: 80%;
 }
