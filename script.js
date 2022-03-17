@@ -14,7 +14,7 @@ let settings = {
 
 let links = [
     ["Source","https://github.com/KazaKazan/aura"],
-    ["Documentation","#"],
+    ["Documentation (WIP)","#"],
     ["Other Projects","https://github.com/KazaKazan/"],
 ]
 
