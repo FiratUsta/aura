@@ -122,6 +122,36 @@ const searchLogic = (() => {
                     case "sr":
                         settingsLogic.reset();
                         break;
+                    
+                    case "color-background":
+                    case "cb":
+                        if(commandList.length === 2){
+                            document.documentElement.style.setProperty("--background", commandList[1]);   
+                        }
+                        else{
+                            errorMessage = 'Usage: "sp:[cb || color-background] <#color hex value>"'
+                        }
+                        break;
+
+                    case "color-foreground":
+                    case "cf":
+                        if(commandList.length === 2){
+                            document.documentElement.style.setProperty("--foreground", commandList[1]);   
+                        }
+                        else{
+                            errorMessage = 'Usage: "sp:[cf || color-foreground] <#color hex value>"'
+                        }
+                        break;
+
+                    case "color-accent":
+                    case "ca":
+                        if(commandList.length === 2){
+                            document.documentElement.style.setProperty("--accent-one", commandList[1]);   
+                        }
+                        else{
+                            errorMessage = 'Usage: "sp:[ca || color-accent] <#color hex value>"'
+                        }
+                        break;
 
                     case "message-clear":
                     case "mc":
