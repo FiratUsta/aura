@@ -50,6 +50,8 @@ input, textarea, select {
     width: min(80%, 1000px);
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 #linkContainer a{
     color: var(--foreground);

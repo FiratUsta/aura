@@ -1,23 +1,20 @@
 // Global Vars
 let settings = {
     "searchEngine": "google",
-    "searchbarPlaceholder": "Enter command or search term...",
+    "searchbarPlaceholder": 'Enter command or search term, "au:help" for help.',
     "clockMode": "24",
+    "clockDisplay": "true",
     "background": "#000",
     "foreground": "#fff",
     "accent": "#d6d6d6",
-    "image": "Assets/default.jpg"
+    "image": "Assets/default.jpg",
+    "title": "Aura"
 };
 
 let links = [
-    ["Link 1","#"],
-    ["Link 2","#"],
-    ["Link 3","#"],
-    ["Link 4","#"],
-    ["Link 5","#"],
-    ["Link 6","#"],
-    ["Link 7","#"],
-    ["Link 8","#"]
+    ["Source","https://github.com/KazaKazan/aura"],
+    ["Documentation","#"],
+    ["Other Projects","https://github.com/KazaKazan/"],
 ]
 
 // Searchbar Logic
@@ -356,12 +353,9 @@ const DOMLogic = (() => {
     };
 
     const addLink = function (linkName, linkURL) {
-        if(links.length < 8){
-            links.push([linkName,linkURL]);
-            refresh();
-            return "";
-        }
-        return "Cannot add more than 8 links."
+        links.push([linkName,linkURL]);
+        refresh();
+        return "";
     };
 
     const removeLink = function (index) {
