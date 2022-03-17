@@ -154,6 +154,26 @@ const searchLogic = (() => {
                         settingsLogic.reset();
                         break;
                     
+                    case "settings-export":
+                    case "exs":
+                        settingsLogic.exportManager("settings");
+                        break;
+                    
+                    case "settings-import":
+                    case "ims":
+                        settingsLogic.importManager("settings");
+                        break;
+
+                    case "links-export":
+                    case "exl":
+                        settingsLogic.exportManager("links");
+                        break;
+                    
+                    case "links-import":
+                    case "iml":
+                        settingsLogic.importManager("links");
+                        break;
+                    
                     case "color-background":
                     case "cb":
                         if(commandList.length === 2){
@@ -331,6 +351,7 @@ const DOMLogic = (() => {
     const linkContainer = document.getElementById("linkContainer");
     const imageElement = document.getElementById("image");
     const searchBar = document.getElementById("searchbar");
+    const settingsWindow = document.getElementById("popupWindow");
 
     const refresh = function () {
         // Re-create links
@@ -381,16 +402,26 @@ const DOMLogic = (() => {
         return "Link " + index + " doesn't exist."
     };
 
+    const toggleSettings = function () {
+        settingsWindow.classList.toggle("hidden");
+    };
+
     return{
         refresh,
         addLink,
         removeLink,
-        setLink
+        setLink,
+        toggleSettings
     };
 })();
 
 // Saving and loading functions for the settings and the links
 const settingsLogic = (() => {
+    // DOM vars
+    const settingsTitle = document.getElementById("popupTitle");
+    const settingsField = document.getElementById("exportImport");
+    const settingsButton = document.getElementById("settingsButton");
+
     const save = function () {
         window.localStorage.setItem("settings",JSON.stringify(settings));
         window.localStorage.setItem("links",JSON.stringify(links));
@@ -408,15 +439,58 @@ const settingsLogic = (() => {
         DOMLogic.refresh();
     };
 
-    const reset = function (){
+    const reset = function () {
         window.localStorage.clear();
         location.reload();
-    }
+    };
+
+    const exportManager= function (mode) {
+        settingsButton.onclick = () => DOMLogic.toggleSettings();
+        settingsTitle.innerText = "Please save the below text.";
+        if(mode==="links"){
+            settingsField.value = JSON.stringify(links);
+        }
+        else{
+            settingsField.value = JSON.stringify(settings);
+        };
+        DOMLogic.toggleSettings();
+    };
+
+    const importManager = function (mode) {
+        settingsButton.onclick = () => _importer(mode);
+        settingsField.value = "";
+        if(mode==="links"){
+            settingsTitle.innerText = "Please input your links below.";
+        }
+        else{
+            settingsTitle.innerText = "Please input your settings below.";  
+        };
+        DOMLogic.toggleSettings();
+    };
+
+    const _importer = function (mode) {
+        console.log("hey!");
+        if(settingsField.value !== ""){
+            if(mode === "links"){
+                links = JSON.parse(settingsField.value);
+            }
+            else{
+                settings = JSON.parse(settingsField.value);
+            }
+            DOMLogic.toggleSettings();
+            DOMLogic.refresh();
+        }
+        else{
+            DOMLogic.toggleSettings();
+        }
+    };
 
     return{
         save,
         load,
-        reset
+        reset,
+        exportManager,
+        importManager
     };
 })();
 

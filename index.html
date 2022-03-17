@@ -12,13 +12,18 @@
 <body>
     <div id="main">
         <p id="clockContainer"></p>
-        <img src="Assets/default.jpg" alt="Don't you want to be lost?" id="image">
+        <img src="Assets/default.jpg" id="image">
         <div id="linkContainer"></div>
         <div id="searchbarContainer">
             <p id="searchbarDecoration">></p>
             <input type="text" name="searchbar" id="searchbar" placeholder="Enter command or search term...">
         </div>
         <p id="errorMessage"></p>
+    </div>
+    <div id="popupWindow" class="hidden">
+        <p id="popupTitle">Please input your settings below.</p>
+        <textarea id="exportImport" placeholder="Enter your settings, or leave empty to cancel."></textarea>
+        <input type="button" value="Save & Close" id="settingsButton">
     </div>
 </body>
 </html>
