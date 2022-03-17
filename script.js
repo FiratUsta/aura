@@ -14,7 +14,7 @@ let settings = {
 
 let links = [
     ["Source","https://github.com/KazaKazan/aura"],
-    ["Documentation (WIP)","#"],
+    ["Documentation","https://github.com/KazaKazan/aura/blob/main/commands.md"],
     ["Other Projects","https://github.com/KazaKazan/"],
 ]
 
@@ -247,7 +247,7 @@ const searchLogic = (() => {
                     
                     case "help":
                     case "h":
-                        errorMessage = 'Please refer to the <a href="#">documentation</a> for help.'
+                        errorMessage = 'Please refer to the <a href="https://github.com/KazaKazan/aura/blob/main/commands.md">documentation</a> for help.'
                         break;
 
                     default:
