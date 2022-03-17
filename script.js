@@ -4,6 +4,7 @@ let settings = {
     "searchbarPlaceholder": 'Enter command or search term, "au:help" for help.',
     "clockMode": "24",
     "clockDisplay": "true",
+    "dayDisplay": "full",
     "background": "#000",
     "foreground": "#fff",
     "accent": "#d6d6d6",
