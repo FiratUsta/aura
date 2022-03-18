@@ -76,6 +76,14 @@ Usage:
 
     se <search engine>
 
+### One Time Search
+
+One time search is a special function, it can only be used in search mode and allows the user to use a specific search engine for one time without changing their settings. Unlike other commands, it doesn't need to be prefixed with `au:` to be used in search mode. For the engine argument, `w` can be used for Wikipedia, `g` for Google and `d` for DuckDuckGo.
+
+Usage:
+
+    !<engine> <search query>
+
 # Theming
 
 ## Color Commands
