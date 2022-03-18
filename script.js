@@ -64,6 +64,16 @@ const searchLogic = (() => {
                             settings["clockMode"] = "24";
                         }
                         break;
+                    
+                    case "calendar-form":
+                    case "cf":
+                        if(settings["dayDisplay"] === "full"){
+                            settings["dayDisplay"] = "short";
+                        }
+                        else{
+                            settings["dayDisplay"] = "full";
+                        };
+                        break;
 
                     case "search-engine":
                     case "se":
@@ -304,7 +314,7 @@ const clock = (() => {
     const clockContainer = document.getElementById("clockContainer");
 
     // Naming Vars
-    const days = ["Sun", "Mon","Tue", "Wed", "Thu", "Fri", "Sat"]
+    const days = ["Sunday", "Monday","Tuesdat", "Wednesday", "Thursday", "Friday", "Saturday"]
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
     // Private Functions
@@ -325,7 +335,11 @@ const clock = (() => {
     const displayTime = function () {
         let clockText = "";
         const today = new Date();
-        clockText += days[today.getDay()] + ", " + months[today.getMonth()] + " " + today.getDate() + " | " ;
+        let day = days[today.getDay()];
+        if(settings["dayDisplay"] === "short"){
+            day = day.slice(0,3);
+        };
+        clockText += day + ", " + months[today.getMonth()] + " " + today.getDate() + " | " ;
         let h = today.getHours();
         let m = today.getMinutes();
         clockText += _checkTime(h, true) + ":" + _checkTime(m);;
