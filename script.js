@@ -45,6 +45,19 @@ const searchLogic = (() => {
     };
 
     const _cmdCheck = function(input){
+        if(/^![wgd] /.test(input) && cmdMode === false){
+            switch(input.charAt(1)){
+                case "w":
+                    _search(input.slice(3),"wikipedia");
+                    return;
+                case "g":
+                    _search(input.slice(3),"google");
+                    return;
+                case "d":
+                    _search(input.slice(3),"duckduckgo");
+                    return;
+            }
+        };
         if(/^au:/.test(input) || cmdMode === true){
             let errorMessage = "";
             let commandList;
@@ -339,10 +352,10 @@ const searchLogic = (() => {
         };
     };
      
-    const _search = function (term) {
+    const _search = function (term,engine=settings["searchEngine"]) {
         let url;
         term = term.split(" ");
-        switch(settings["searchEngine"]){
+        switch(engine){
             case "google":
                 url = "https://www.google.com/search?q=";
                 break;
