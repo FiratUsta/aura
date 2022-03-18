@@ -122,6 +122,7 @@ const searchLogic = (() => {
                             switch(commandList[1]){
                                 case "duckduckgo":
                                 case "google":
+                                case "wikipedia":
                                     settings["searchEngine"] = commandList[1];
                                     break;
                                 default:
@@ -347,6 +348,9 @@ const searchLogic = (() => {
                 break;
             case "duckduckgo":
                 url = "https://duckduckgo.com/?q=";
+                break;
+            case "wikipedia":
+                url = "https://wikipedia.org/w/index.php?search="
                 break;
         }
         for (let i = 0; i < term.length; i++){
