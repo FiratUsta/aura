@@ -43,5 +43,5 @@ https://kazakazan.github.io/aura/</h2>
   * More display image options (ability to position the image inside the display, filters etc.)
 * Improved functionality.
   * More utility functions (simple cli calculator, ~one-time search engine change etc.~). (One time search implemented.)
-  * More and improved link list functions (~swap link positions,~ edit just name or just URL, remove all links etc.). (Link swapping implemented.)
+  * More and improved link list functions (~swap link positions,~ edit just name or just URL, ~remove all links etc.~). (Link swapping and removing all links implemented.)
  

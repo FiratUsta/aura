@@ -495,6 +495,11 @@ const DOMLogic = (() => {
 
     const removeLink = function (index) {
         if(links.length > 0){
+            if(index === -1){
+                links = [];
+                refresh();
+                return "";
+            };
             if(_isBetween(index,0,links.length)){
                 links.splice(index - 1,1);
                 refresh();
@@ -502,7 +507,7 @@ const DOMLogic = (() => {
             }
             else{
                 return "Link " + index + " doesn't exist.";
-            }
+            };
         };
         return "There's nothing to remove."
     };

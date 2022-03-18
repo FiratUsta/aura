@@ -170,7 +170,7 @@ Usage:
 
 ### `link-remove || lr`
 
-Removes a link with the given index in the list.
+Removes a link with the given index in the list. A link index of `-1` can be used to remove all links.
 
 Usage:
 
