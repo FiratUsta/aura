@@ -60,6 +60,22 @@ Usage:
 
     cm
 
+### `date-form || df`
+
+Toggles between long-form and short-form modes for the calendar day display.
+
+Usage:
+
+    df
+
+### `clock-display || cd`
+
+Toggles date and clock visibilities in the calendar. For the component argument, use `c` for the clock, `d` for the date and `a` for both. For the visibility argument, use `true` for visible and `false` for hidden.
+
+Usage:
+
+    cd <component> <visibility>
+
 ### `search-engine || se`
 
 Changes the search engine of the searchbar to the inputted service. Currently the supported engines are `duckduckgo` and `google`.

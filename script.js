@@ -4,7 +4,8 @@ let settings = {
     "searchbarPlaceholder": 'Enter command or search term, "au:help" for help.',
     "clockMode": "24",
     "clockDisplay": "true",
-    "dayDisplay": "full",
+    "dateDisplay": "true",
+    "dayForm": "full",
     "background": "#000",
     "foreground": "#fff",
     "accent": "#d6d6d6",
@@ -65,13 +66,51 @@ const searchLogic = (() => {
                         }
                         break;
                     
-                    case "calendar-form":
-                    case "cf":
-                        if(settings["dayDisplay"] === "full"){
-                            settings["dayDisplay"] = "short";
+                    case "date-form":
+                    case "df":
+                        if(settings["dayForm"] === "full"){
+                            settings["dayForm"] = "short";
                         }
                         else{
-                            settings["dayDisplay"] = "full";
+                            settings["dayForm"] = "full";
+                        };
+                        break;
+                    
+                    case "calendar-display":
+                    case "cd":
+                        if(commandList.length === 3){
+                            const components = [];
+                            switch(commandList[1]){
+                                case "c":
+                                    components.push("clockDisplay");
+                                    break;
+                                case "d":
+                                    components.push("dateDisplay");
+                                    break;
+                                case "a":
+                                    components.push("clockDisplay");
+                                    components.push("dateDisplay");
+                                    break;
+                                default:
+                                    errorMessage = "Invalid component argument.";
+                                    break;
+                            };
+                            if(components === []){
+                                break;
+                            }
+                            else{
+                                if(commandList[2] === "true" || commandList[2] === "false"){
+                                    components.forEach(component => {
+                                        settings[component] = commandList[2];
+                                    });
+                                }
+                                else{
+                                    errorMessage = "Invalid visibility argument."
+                                };
+                            };
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[cd || calendar-display] <component> <visibility>"'
                         };
                         break;
 
@@ -335,22 +374,29 @@ const clock = (() => {
     const displayTime = function () {
         let clockText = "";
         const today = new Date();
-        let day = days[today.getDay()];
-        if(settings["dayDisplay"] === "short"){
-            day = day.slice(0,3);
+        if(settings["dateDisplay"] === "true"){
+            let day = days[today.getDay()];
+            if(settings["dayForm"] === "short"){
+                day = day.slice(0,3);
+            };
+            clockText += day + ", " + months[today.getMonth()] + " " + today.getDate()
         };
-        clockText += day + ", " + months[today.getMonth()] + " " + today.getDate() + " | " ;
+        if(settings["dateDisplay"] === "true" && settings["clockDisplay"] === "true"){
+            clockText += " | " ;
+        };
         let h = today.getHours();
         let m = today.getMinutes();
-        clockText += _checkTime(h, true) + ":" + _checkTime(m);;
-        if(settings["clockMode"] === "12"){
-            if(h > 12){
-                clockText +=  " PM";
+        if(settings["clockDisplay"] === "true"){
+            clockText += _checkTime(h, true) + ":" + _checkTime(m);;
+            if(settings["clockMode"] === "12"){
+                if(h > 12){
+                    clockText +=  " PM";
+                }
+                else{
+                    clockText +=  " AM";
+                };
             }
-            else{
-                clockText +=  " AM";
-            };
-        }
+        };
         clockContainer.innerText = clockText
         setTimeout(displayTime, 1000);
     };
