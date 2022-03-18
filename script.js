@@ -56,6 +56,7 @@ const searchLogic = (() => {
             };
             if(commandList.length > 0){
                 switch(commandList[0]){
+                    // Calendar Commands
                     case "clock-mode":
                     case "cm":
                         if(settings["clockMode"] === "24"){
@@ -114,6 +115,7 @@ const searchLogic = (() => {
                         };
                         break;
 
+                    // Searchbar commands
                     case "search-engine":
                     case "se":
                         if(commandList.length === 2){
@@ -144,7 +146,8 @@ const searchLogic = (() => {
                             errorMessage = 'Usage: "au:[sp || search-placeholder] <placeholder text>"'
                         }
                         break;
-
+                    
+                    // Link List Commands
                     case "link-add":
                     case "la":
                         if(commandList.length >= 3){
@@ -156,7 +159,7 @@ const searchLogic = (() => {
                         }
                         break;
 
-                    case  "link-remove":
+                    case "link-remove":
                     case "lr":
                         if(commandList.length === 2){
                             const linkIndex = parseInt(commandList[1]);
@@ -188,7 +191,35 @@ const searchLogic = (() => {
                             errorMessage = 'Usage: "au:[ls || link-set] <link index> <link name> <link URL>"'
                         }
                         break;
+                    
+                    case "link-swap":
+                    case "lw":
+                        if(commandList.length === 3){
+                            const firstIndex = parseInt(commandList[1]) - 1;
+                            const secondIndex = parseInt(commandList[2]) - 1;
+                            if(isNaN(firstIndex) || isNaN(secondIndex)){
+                                errorMessage = "Both arguments need to be numbers."
+                            }
+                            else{
+                                errorMessage = DOMLogic.swapLinks(firstIndex, secondIndex);
+                            }
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[lw || link-swap] <link index> <link index>"'
+                        };
+                        break;
+                    
+                    case "links-export":
+                    case "exl":
+                        settingsLogic.exportManager("links");
+                        break;
+                    
+                    case "links-import":
+                    case "iml":
+                        settingsLogic.importManager("links");
+                        break;
 
+                    // Settings Commands
                     case "settings-save":
                     case "ss":
                         settingsLogic.save();
@@ -213,17 +244,8 @@ const searchLogic = (() => {
                     case "ims":
                         settingsLogic.importManager("settings");
                         break;
-
-                    case "links-export":
-                    case "exl":
-                        settingsLogic.exportManager("links");
-                        break;
                     
-                    case "links-import":
-                    case "iml":
-                        settingsLogic.importManager("links");
-                        break;
-                    
+                    // Theming Commands                    
                     case "color-background":
                     case "cb":
                         if(commandList.length === 2){
@@ -273,7 +295,8 @@ const searchLogic = (() => {
                         settings["image"] = "Assets/default.jpg";
                         DOMLogic.refresh();
                         break;
-
+                    
+                    // Utility Commands
                     case "message-clear":
                     case "mc":
                         errorMessage = "";
@@ -414,6 +437,19 @@ const DOMLogic = (() => {
     const searchBar = document.getElementById("searchbar");
     const settingsWindow = document.getElementById("popupWindow");
 
+    const _isBetween = function (value,min,max,inclusive=true){
+        let result = false;
+        if(min <= value && value <= max){
+            result = true;
+        }
+        if(!inclusive){
+            if(value === min || value === max){
+                result = false;
+            };
+        };
+        return result;
+    };
+
     const refresh = function () {
         // Re-create links
         linkContainer.innerHTML = "";
@@ -442,7 +478,7 @@ const DOMLogic = (() => {
 
     const removeLink = function (index) {
         if(links.length > 0){
-            if(links.length >= index && index >= 0){
+            if(_isBetween(index,0,links.length)){
                 links.splice(index - 1,1);
                 refresh();
                 return "";
@@ -455,12 +491,28 @@ const DOMLogic = (() => {
     };
 
     const setLink = function (index, linkName, linkURL) {
-        if(links.length >= index && index >= 0){
+        if(_isBetween(index,0,links.length)){
             links[index-1] = [linkName, linkURL];
             refresh();
             return "";
         }
         return "Link " + index + " doesn't exist."
+    };
+
+    const swapLinks = function (fIndex, sIndex){
+        if(isNaN(fIndex) || isNaN(sIndex)){
+            return "Both arguments need to be numbers.";
+        }
+        else{
+            if(_isBetween(fIndex,0,links.length) && _isBetween(sIndex,0,links.length)){
+                [links[fIndex], links[sIndex]] = [links[sIndex], links[fIndex]];
+                refresh();
+                return "";
+            }
+            else{
+                return "Argument(s) out of list range.";
+            };
+        };
     };
 
     const toggleSettings = function () {
@@ -472,6 +524,7 @@ const DOMLogic = (() => {
         addLink,
         removeLink,
         setLink,
+        swapLinks,
         toggleSettings
     };
 })();

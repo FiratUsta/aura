@@ -36,7 +36,7 @@ https://kazakazan.github.io/aura/</h2>
   * Better multi-line link list support.
 * More customization options.
   * Allow the customization of the corner decorations (change shape, hide/show etc.).
-  * ~~More clock / calendar options (long-form day names, hide/show etc.).~~
+  * ~~More clock / calendar options (long-form day names, hide/show etc.).~~ (Feature complete.)
   * Dark and light mode support with support for automatic switching in-between and appropriate settings/commands.
   * More search engine options (wikipedia).
   * More pre-made themes.
