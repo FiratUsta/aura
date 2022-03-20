@@ -24,7 +24,7 @@ The below show command can be used as well:
 
     terminal-mode
 
-While both forms of the commands will be shown in the document, the examples will use the short-form versions of the commands.
+While both forms of the commands will be shown in the document, the usage/examples will use the short-form versions of the commands. For more complex commands, examples will be shown as well.
 
 # Utility Commands
 
@@ -70,7 +70,7 @@ Usage:
 
 ### `search-engine || se`
 
-Changes the search engine of the searchbar to the inputted service. Currently the supported engines are `duckduckgo` and `google`.
+Changes the search engine of the searchbar to the inputted service. Currently the supported engines are `duckduckgo`, `google` and `wikipedia`.
 
 Usage:
 
@@ -154,6 +154,14 @@ Usage:
 
     cd <component> <visibility>
 
+Example:
+
+    #This command will hide the clock while keeping the date at the current setting.
+    cd c false
+
+    #This command will show both components.
+    cd a true
+
 # Link List Commands
 
 These commands deal with the links on display under the display image. For all commands that require a link index parameter, the input must be an integer. The index is counted in a top-left to bottom-right fashion starting from 1.
@@ -167,6 +175,11 @@ Adds a link to the end of the link list.
 Usage:
 
     la <link name> <link URL>
+
+Example:
+
+    #This command will add a link to myawesomewebsite.com at the end of the link list with the name "My Awesome Website".
+    la My Awesome Website https://myawesomewebsite.com
 
 ### `link-remove || lr`
 
@@ -183,6 +196,14 @@ Changes the link at the given index' content at the given index. Accepted link c
 Usage:
 
     ls <link index> <link component> <link name, link URL or both>
+
+Example:
+
+    #This command will set the first link on the link list's name to "My Awesome Website" while keeping the current URL.
+    ls 1 n My Awesome Website
+
+    #This command will set the first link on the link list's name and URL to "My Awesome Website" and "https://myawesomewebsite.com" respectively.
+    ls 1 a My Awesome Website https://myawesomewebsite.com
 
 ### `link-swap || lw`
 
