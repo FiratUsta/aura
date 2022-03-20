@@ -10,7 +10,18 @@ let settings = {
     "foreground": "#fff",
     "accent": "#d6d6d6",
     "image": "Assets/default.jpg",
-    "title": "Aura"
+    "title": "Aura",
+    "currentMode": "dark",
+    "autoLightBegin": "0600",
+    "autoLightEnd": "1800",
+    "autoMode": "true"
+};
+
+let lightSettings = {
+    "background": "#fff",
+    "foreground": "#000",
+    "accent": "#d6d6d6",
+    "image": "Assets/default.jpg",
 };
 
 let links = [
@@ -18,6 +29,19 @@ let links = [
     ["Documentation","https://github.com/KazaKazan/aura/blob/main/commands.md"],
     ["Other Projects","https://github.com/KazaKazan/"],
 ]
+
+const isBetween = function (value,min,max,inclusive=true){
+    let result = false;
+    if(min <= value && value <= max){
+        result = true;
+    }
+    if(!inclusive){
+        if(value === min || value === max){
+            result = false;
+        };
+    };
+    return result;
+};
 
 // Searchbar Logic
 const searchLogic = (() => {
@@ -326,6 +350,65 @@ const searchLogic = (() => {
                         DOMLogic.refresh();
                         break;
                     
+                    case "darkmode":
+                    case "dm":
+                        settings["currentMode"] = "dark";
+                        DOMLogic.refresh();
+                        break;
+
+                    case "lightmode":
+                    case "lm":
+                        settings["currentMode"] = "light";
+                        DOMLogic.refresh();
+                        break;
+
+                    case "lightmode-save":
+                    case "lms":
+                        window.localStorage.setItem("lightMode",JSON.stringify(lightSettings));
+                        break;
+
+                    case "lightmode-auto":
+                    case "lma":
+                        if(commandList.length > 1){
+                            switch(commandList[1]){
+                                case "true":
+                                    if(commandList.length === 2){
+                                        settings["autoMode"] = commandList[1];
+                                        break;
+                                    }
+                                    else if(commandList.length === 4){
+                                        const lmBegin = parseInt(commandList[2]);
+                                        const lmEnd = parseInt(commandList[3]);
+                                        if (isNaN(lmBegin) || isNaN(lmEnd)) {
+                                            errorMessage = "Hours provided must be numbers.";
+                                        }
+                                        else if (isBetween(lmBegin,0,2400) && isBetween(lmEnd,0,2400)) {
+                                            settings["autoMode"] = commandList[1];
+                                            settings["autoLightBegin"] = commandList[2];
+                                            settings["autoLightEnd"] = commandList[3];
+                                        }
+                                        else{
+                                            errorMessage = "Hours provided must be between 0000 and 2400";
+                                        };
+                                        break;
+                                    }
+                                    else{
+                                        errorMessage = "You must provide a beginning and an end hour for auto-lightmode in 24 hour format.";
+                                        break;
+                                    };
+                                case "false":
+                                    settings["autoMode"] = commandList[1];
+                                    break;
+                                default:
+                                    errorMessage = 'State can be set to "true" or "false" only.';
+                                    break;
+                            };
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[lma || lightmode-auto] <state> <lightmode begin hour> <lightmode end hour>"'
+                        };
+                        break;
+                    
                     // Utility Commands
                     case "message-clear":
                     case "mc":
@@ -454,11 +537,31 @@ const clock = (() => {
             }
         };
         clockContainer.innerText = clockText
+        if(settings["autoMode"] === "true"){checkLightMode(""+h+m)};
         setTimeout(displayTime, 1000);
     };
 
+    const checkLightMode = function (currentTime){
+        console.log(parseInt(currentTime));
+        console.log(parseInt(settings["autoLightBegin"]));
+        console.log(parseInt(settings["autoLightEnd"]));
+        if(isBetween(parseInt(currentTime),parseInt(settings["autoLightBegin"]),parseInt(settings["autoLightEnd"]))){
+            if(settings["currentMode"] === "dark"){
+                settings["currentMode"] = "light";
+                DOMLogic.refresh();
+            };
+        }
+        else{
+            if(settings["currentMode"] === "light"){
+                settings["currentMode"] = "dark";
+                DOMLogic.refresh();
+            };
+        };
+    };
+
     return{
-        displayTime
+        displayTime,
+        checkLightMode
     };
 })();
 
@@ -470,19 +573,6 @@ const DOMLogic = (() => {
     const searchBar = document.getElementById("searchbar");
     const settingsWindow = document.getElementById("popupWindow");
 
-    const _isBetween = function (value,min,max,inclusive=true){
-        let result = false;
-        if(min <= value && value <= max){
-            result = true;
-        }
-        if(!inclusive){
-            if(value === min || value === max){
-                result = false;
-            };
-        };
-        return result;
-    };
-
     const refresh = function () {
         // Re-create links
         linkContainer.innerHTML = "";
@@ -493,12 +583,19 @@ const DOMLogic = (() => {
             newLink.innerText = link[0];
             linkContainer.appendChild(newLink);
         });
-        // Set page colors
-        document.documentElement.style.setProperty("--background", settings["background"]);
-        document.documentElement.style.setProperty("--foreground", settings["foreground"]);
-        document.documentElement.style.setProperty("--accent-one", settings["accent"]);
-        // Set image
-        imageElement.setAttribute("src",settings["image"]);
+        // Set page colors and the image
+        if(settings["currentMode"] == "dark"){
+            document.documentElement.style.setProperty("--background", settings["background"]);
+            document.documentElement.style.setProperty("--foreground", settings["foreground"]);
+            document.documentElement.style.setProperty("--accent-one", settings["accent"]);
+            imageElement.setAttribute("src",settings["image"]);
+        }
+        else{
+            document.documentElement.style.setProperty("--background", lightSettings["background"]);
+            document.documentElement.style.setProperty("--foreground", lightSettings["foreground"]);
+            document.documentElement.style.setProperty("--accent-one", lightSettings["accent"]);
+            imageElement.setAttribute("src",lightSettings["image"]);
+        }
         // Set searchbar placeholder
         searchBar.setAttribute("placeholder",settings["searchbarPlaceholder"])
     };
@@ -516,7 +613,7 @@ const DOMLogic = (() => {
                 refresh();
                 return "";
             };
-            if(_isBetween(index,0,links.length)){
+            if(isBetween(index,0,links.length)){
                 links.splice(index - 1,1);
                 refresh();
                 return "";
@@ -529,7 +626,7 @@ const DOMLogic = (() => {
     };
 
     const setLink = function (index, component, arguments) {
-        if(_isBetween(index,0,links.length)){
+        if(isBetween(index,0,links.length)){
             switch(component){
                 case "a":
                     if(arguments.length === 2 && arguments[0] !== ""){
@@ -555,7 +652,7 @@ const DOMLogic = (() => {
             return "Both arguments need to be numbers.";
         }
         else{
-            if(_isBetween(fIndex,0,links.length) && _isBetween(sIndex,0,links.length)){
+            if(isBetween(fIndex,0,links.length) && isBetween(sIndex,0,links.length)){
                 [links[fIndex], links[sIndex]] = [links[sIndex], links[fIndex]];
                 refresh();
                 return "";
@@ -589,6 +686,7 @@ const settingsLogic = (() => {
 
     const save = function () {
         window.localStorage.setItem("settings",JSON.stringify(settings));
+        window.localStorage.setItem("lightMode",JSON.stringify(lightSettings));
         window.localStorage.setItem("links",JSON.stringify(links));
     };
     
@@ -597,10 +695,15 @@ const settingsLogic = (() => {
         if(settingStorage !== null){
             settings = settingStorage;
         };
+        lightStorage = JSON.parse(window.localStorage.getItem("lightMode"));
+        if(lightStorage !== null){
+            lightSettings = lightStorage;
+        };
         linkStorage = JSON.parse(window.localStorage.getItem("links"));
         if(linkStorage !== null){
             links = linkStorage;
         };
+        clock.checkLightMode;
         DOMLogic.refresh();
     };
 

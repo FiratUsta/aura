@@ -114,6 +114,45 @@ Usage:
 
     ca <CSS color>
 
+### `darkmode || dm`
+
+Changes the theming to dark mode.
+
+Usage:
+
+    dm
+
+### `lightmode || lm`
+
+Changes the theming to light mode.
+
+Usage:
+
+    lm
+
+### `lightmode-save || lms`
+
+Saves the current theming settings as your light mode. Only the image and color settings are saved.
+
+Usage:
+
+    lms
+
+### `lightmode-auto || lma`
+
+Sets auto-lightmode on or off within the provided hours. For the state argument, the values `true` and `false` are accepted. Only providing the state argument will turn the auto-lightmode on with the current hour values (default are between 6 AM and 6 PM). If provided, the hour values must be in 24 hour format.
+
+Usage:
+
+    lma <state> <lightmode begin hour> <lightmode end hour>
+
+Example:
+
+    #This command will turn the auto-lightmode on between 6 AM and 6 PM.
+    lma true 0600 1800
+
+    #This command will turn the auto-lightmode off.
+    lma false
 ## Image Commands
 
 These commands deal with the image on display at the center of the screen. For custom images, the recommended ratio is 4:1 to avoid any cutoffs.
