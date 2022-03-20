@@ -178,11 +178,11 @@ Usage:
 
 ### `link-set || ls`
 
-Changes the link at the given index' content to the given name and URL.
+Changes the link at the given index' content at the given index. Accepted link components are `a` for both name and URL, `n` for just the name and `u` for just the URL. If both components are to be changed, the link URL must be supplied after the name.
 
 Usage:
 
-    ls <link index> <link name> <link URL>
+    ls <link index> <link component> <link name, link URL or both>
 
 ### `link-swap || lw`
 

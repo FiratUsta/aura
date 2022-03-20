@@ -197,12 +197,28 @@ const searchLogic = (() => {
                                 errorMessage = "The link index must be a number."
                             }
                             else{
-                                const linkName = _cmdParser(commandList, 2);
-                                errorMessage = DOMLogic.setLink(linkIndex, linkName, commandList[commandList.length-1]);
+                                let component;
+                                switch(commandList[2]){
+                                    case "a":
+                                        component = _cmdParser(commandList, 3);
+                                        errorMessage = DOMLogic.setLink(linkIndex, "a", [component, commandList[commandList.length-1]]);
+                                        break;
+                                    case "n":
+                                        component = _cmdParser(commandList, 3, 0);
+                                        errorMessage = DOMLogic.setLink(linkIndex, "n", component)
+                                        break;
+                                    case "u":
+                                        component = commandList[3];
+                                        errorMessage = DOMLogic.setLink(linkIndex, "u", component);
+                                        break;
+                                    default:
+                                        errorMessage = 'Accepted component arguments are "a", "n" and "u".';
+                                        break;
+                                };
                             };
                         }
                         else{
-                            errorMessage = 'Usage: "au:[ls || link-set] <link index> <link name> <link URL>"'
+                            errorMessage = 'Usage: "au:[ls || link-set] <link index> <link component> <link name> <link URL>"'
                         }
                         break;
                     
@@ -512,9 +528,22 @@ const DOMLogic = (() => {
         return "There's nothing to remove."
     };
 
-    const setLink = function (index, linkName, linkURL) {
+    const setLink = function (index, component, arguments) {
         if(_isBetween(index,0,links.length)){
-            links[index-1] = [linkName, linkURL];
+            switch(component){
+                case "a":
+                    if(arguments.length === 2 && arguments[0] !== ""){
+                        links[index-1] = arguments;
+                        break;
+                    }
+                    return "A display name and a link must be supplied.";
+                case "n":
+                    links[index-1][0] = arguments;
+                    break;
+                case "u":
+                    links[index-1][1] = arguments;
+                    break;
+            }
             refresh();
             return "";
         }
