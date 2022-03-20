@@ -17,7 +17,7 @@ and pasting them into the input field in the pop-up window.
 
 ### Screenshot
 
-![Waves](/Templates/waves.png)
+![Waves](/Docs/Templates/waves.png)
 
 ### Settings
 
@@ -29,7 +29,7 @@ and pasting them into the input field in the pop-up window.
 
 ### Screenshot
 
-![Zen](/Templates/zen.png)
+![Zen](/Docs/Templates/zen.png)
 
 ### Settings
 
@@ -41,7 +41,7 @@ and pasting them into the input field in the pop-up window.
 
 ### Screenshot
 
-![Golden Sun](/Templates/goldensun.png)
+![Golden Sun](/Docs/Templates/goldensun.png)
 
 ### Settings
 
@@ -53,7 +53,7 @@ and pasting them into the input field in the pop-up window.
 
 ### Screenshot
 
-![Sky High](/Templates/skyhigh.png)
+![Sky High](/Docs/Templates/skyhigh.png)
 
 ### Settings
 

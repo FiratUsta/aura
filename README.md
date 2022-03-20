@@ -12,9 +12,9 @@ It's import/export capabilities also provide an easy way of transferring link li
 
 To start using Aura, head over to the live page and set it as your homepage/new tab page.
 
-Learn how to customize your link list with <a href="https://github.com/KazaKazan/aura/blob/main/commands.md#link-list-commands">the documentation</a>.
+Learn how to customize your link list with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#link-list-commands">the documentation</a>.
 
-Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/templates.md">pre-made themes</a>.
+Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/templates.md">pre-made themes</a>.
 
 ---
 
