@@ -2,7 +2,7 @@
 
 <p align="center"> A customizable startpage that lives in your browser.  </p>
 
-![Preview](/DocsTemplates/default.png)
+![Preview](/Docs/Templates/default.png)
 
 Aura is a minimal, customizable and functional startpage designed to be used alongside with browser extensions such as <a href="https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/">New Tab Override</a>  in order to have a personalized startpage without the hassle of self-hosting.
 
