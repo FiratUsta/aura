@@ -364,7 +364,10 @@ const searchLogic = (() => {
 
                     case "lightmode-save":
                     case "lms":
-                        window.localStorage.setItem("lightMode",JSON.stringify(lightSettings));
+                        lightSettings["background"] = settings["background"];
+                        lightSettings["foreground"] = settings["foreground"];
+                        lightSettings["accent"] = settings["accent"];
+                        lightSettings["image"] = settings["image"];
                         break;
 
                     case "lightmode-auto":
@@ -542,9 +545,6 @@ const clock = (() => {
     };
 
     const checkLightMode = function (currentTime){
-        console.log(parseInt(currentTime));
-        console.log(parseInt(settings["autoLightBegin"]));
-        console.log(parseInt(settings["autoLightEnd"]));
         if(isBetween(parseInt(currentTime),parseInt(settings["autoLightBegin"]),parseInt(settings["autoLightEnd"]))){
             if(settings["currentMode"] === "dark"){
                 settings["currentMode"] = "light";
