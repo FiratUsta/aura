@@ -561,7 +561,6 @@ const clock = (() => {
     const checkLightMode = function (currentTime){
         if(isBetween(parseInt(currentTime),parseInt(settings["autoLightBegin"]),parseInt(settings["autoLightEnd"]))){
             if(settings["currentMode"] === "dark"){
-                console.log("yay")
                 settings["currentMode"] = "light";
                 DOMLogic.refresh();
             };
