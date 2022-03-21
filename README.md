@@ -35,7 +35,6 @@ https://kazakazan.github.io/aura/</h2>
 * Improved functionality.
   * Weather widget with appropriate settings.
   * Text display widget with appropriate settings.
-  * More utility functions (simple cli calculator, ~one-time search engine change etc.~). (One time search implemented.)
   * Better feedback when commands are carried out.
 * GUI settings.
   * GUI settings may be implemented after all other planned features are implemented.
