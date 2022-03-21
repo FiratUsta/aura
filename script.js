@@ -550,13 +550,14 @@ const clock = (() => {
             }
         };
         clockContainer.innerText = clockText
-        if(settings["autoMode"] === "true"){checkLightMode(""+h+m)};
+        if(settings["autoMode"] === "true"){checkLightMode(h+String(m).padStart(2,"0"))};
         setTimeout(displayTime, 1000);
     };
 
     const checkLightMode = function (currentTime){
         if(isBetween(parseInt(currentTime),parseInt(settings["autoLightBegin"]),parseInt(settings["autoLightEnd"]))){
             if(settings["currentMode"] === "dark"){
+                console.log("yay")
                 settings["currentMode"] = "light";
                 DOMLogic.refresh();
             };
