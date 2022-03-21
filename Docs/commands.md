@@ -98,6 +98,14 @@ Usage:
 
     cb <CSS color>
 
+### `color-background-light || cbl`
+
+Changes the light-mode background color to a given CSS color.
+
+Usage:
+
+    cbl <CSS color>
+
 ### `color-foreground || cf`
 
 Changes the foreground / text color to a given CSS color.
@@ -106,6 +114,14 @@ Usage:
 
     cf <CSS color>
 
+### `color-foreground-light || cfl`
+
+Changes the light-mode foreground / text color to a given CSS color.
+
+Usage:
+
+    cfl <CSS color>
+
 ### `color-accent || ca`
 
 Changes the accent color used in the image border, searchbar border and searchbar decoration to a given CSS color.
@@ -113,6 +129,14 @@ Changes the accent color used in the image border, searchbar border and searchba
 Usage:
 
     ca <CSS color>
+
+### `color-accent-light || cal`
+
+Changes the accent color used in the image border, searchbar border and searchbar decoration to a given CSS color.
+
+Usage:
+
+    cal <CSS color>
 
 ### `darkmode || dm`
 
@@ -129,14 +153,6 @@ Changes the theming to light mode.
 Usage:
 
     lm
-
-### `lightmode-save || lms`
-
-Saves the current theming settings as your light mode. Only the image and color settings are saved.
-
-Usage:
-
-    lms
 
 ### `lightmode-auto || lma`
 
@@ -165,9 +181,17 @@ Usage:
 
     is <image URL>
 
+### `image-set-light || isl`
+
+Changes the light-mode display image to an image from the given URL.
+
+Usage:
+
+    isl <image URL>
+
 ### `image-clear || ic`
 
-Sets the display image back to the default image.
+Sets the display image for both dark and light modes back to the default image.
 
 Usage:
 

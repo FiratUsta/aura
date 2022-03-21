@@ -37,14 +37,15 @@ https://kazakazan.github.io/aura/</h2>
 * More customization options.
   * Allow the customization of the corner decorations (change shape, hide/show etc.).
   * ~~More clock / calendar options (long-form day names, hide/show etc.).~~ (Feature complete.)
-  * ~Dark and light mode support with support for automatic switching in-between and appropriate settings/commands.~ (Feature implemented, right now it's very wonky.)
+  * ~Dark and light mode support with support for automatic switching in-between and appropriate settings/commands.~ (Feature implemented, the commands are subject to change, planning to make it so that the default color commands will change whatever mode you're on.)
   * ~More search engine options (wikipedia).~ (Feature complete.)
-  * More pre-made themes.
+  * Update pre-made themes.
   * More display image options (ability to position the image inside the display, filters etc.)
 * Improved functionality.
   * Weather widget with appropriate settings.
   * Text display widget with appropriate settings.
   * More utility functions (simple cli calculator, ~one-time search engine change etc.~). (One time search implemented.)
   * ~More and improved link list functions (swap link positions, edit just name or just URL, remove all links etc.).~(Feature complete.)
+  * Better feedback when commands are carried out.
 * GUI settings.
   * GUI settings may be implemented after all other planned features are implemented.
