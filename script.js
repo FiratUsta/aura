@@ -14,14 +14,11 @@ let settings = {
     "currentMode": "dark",
     "autoLightBegin": "0600",
     "autoLightEnd": "1800",
-    "autoMode": "true"
-};
-
-let lightSettings = {
-    "background": "#fff",
-    "foreground": "#000",
-    "accent": "#d6d6d6",
-    "image": "Assets/default.jpg",
+    "autoMode": "true",
+    "lmBackground": "#fff",
+    "lmForeground": "#000",
+    "lmAccent": "#d6d6d6",
+    "lmImage": "Assets/defaultLight.jpg"
 };
 
 let links = [
@@ -311,6 +308,17 @@ const searchLogic = (() => {
                         }
                         break;
 
+                    case "color-background-light":
+                    case "cbl":
+                        if(commandList.length === 2){
+                            settings["lmBackground"] = commandList[1];
+                            DOMLogic.refresh();   
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[cbl || color-background-light] <CSS color>"'
+                        }
+                        break;
+
                     case "color-foreground":
                     case "cf":
                         if(commandList.length === 2){
@@ -319,6 +327,17 @@ const searchLogic = (() => {
                         }
                         else{
                             errorMessage = 'Usage: "au:[cf || color-foreground] <CSS color>"'
+                        }
+                        break;
+
+                    case "color-foreground-light":
+                    case "cfl":
+                        if(commandList.length === 2){
+                            settings["lmForeground"] = commandList[1];
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[cfl || color-foreground-light] <CSS color>"'
                         }
                         break;
 
@@ -333,6 +352,17 @@ const searchLogic = (() => {
                         }
                         break;
                     
+                    case "color-accent-light":
+                    case "cal":
+                        if(commandList.length === 2){
+                            settings["lmAccent"] = commandList[1];
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[cal || color-accent-light] <CSS color>"'
+                        }
+                        break;
+
                     case "image-set":
                     case "is":
                         if(commandList.length === 2){
@@ -343,10 +373,22 @@ const searchLogic = (() => {
                             errorMessage = 'Usage: "au:[is || image-set] <image URL>"'
                         }
                         break;
+
+                    case "image-set-light":
+                    case "isl":
+                        if(commandList.length === 2){
+                            settings["lmImage"] = commandList[1];
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[isl || image-set-light] <image URL>"'
+                        }
+                        break;
                     
                     case "image-clear":
                     case "ic":
                         settings["image"] = "Assets/default.jpg";
+                        settings["lmImage"] = "Assets/defaultLight.jpg";
                         DOMLogic.refresh();
                         break;
                     
@@ -360,14 +402,6 @@ const searchLogic = (() => {
                     case "lm":
                         settings["currentMode"] = "light";
                         DOMLogic.refresh();
-                        break;
-
-                    case "lightmode-save":
-                    case "lms":
-                        lightSettings["background"] = settings["background"];
-                        lightSettings["foreground"] = settings["foreground"];
-                        lightSettings["accent"] = settings["accent"];
-                        lightSettings["image"] = settings["image"];
                         break;
 
                     case "lightmode-auto":
@@ -591,10 +625,10 @@ const DOMLogic = (() => {
             imageElement.setAttribute("src",settings["image"]);
         }
         else{
-            document.documentElement.style.setProperty("--background", lightSettings["background"]);
-            document.documentElement.style.setProperty("--foreground", lightSettings["foreground"]);
-            document.documentElement.style.setProperty("--accent-one", lightSettings["accent"]);
-            imageElement.setAttribute("src",lightSettings["image"]);
+            document.documentElement.style.setProperty("--background", settings["lmBackground"]);
+            document.documentElement.style.setProperty("--foreground", settings["lmForeground"]);
+            document.documentElement.style.setProperty("--accent-one", settings["lmAccent"]);
+            imageElement.setAttribute("src",settings["lmImage"]);
         }
         // Set searchbar placeholder
         searchBar.setAttribute("placeholder",settings["searchbarPlaceholder"])
@@ -686,7 +720,6 @@ const settingsLogic = (() => {
 
     const save = function () {
         window.localStorage.setItem("settings",JSON.stringify(settings));
-        window.localStorage.setItem("lightMode",JSON.stringify(lightSettings));
         window.localStorage.setItem("links",JSON.stringify(links));
     };
     
@@ -694,10 +727,6 @@ const settingsLogic = (() => {
         settingStorage = JSON.parse(window.localStorage.getItem("settings"));
         if(settingStorage !== null){
             settings = settingStorage;
-        };
-        lightStorage = JSON.parse(window.localStorage.getItem("lightMode"));
-        if(lightStorage !== null){
-            lightSettings = lightStorage;
         };
         linkStorage = JSON.parse(window.localStorage.getItem("links"));
         if(linkStorage !== null){
