@@ -702,7 +702,11 @@ const settingsLogic = (() => {
     const load = function () {
         settingStorage = JSON.parse(window.localStorage.getItem("settings"));
         if(settingStorage !== null){
-            settings = settingStorage;
+            for (const [key, value] of Object.entries(settingStorage)) {
+                if(settings.hasOwnProperty(key)){
+                    settings[key] = value;
+                };
+              };
         };
         linkStorage = JSON.parse(window.localStorage.getItem("links"));
         if(linkStorage !== null){
@@ -748,7 +752,12 @@ const settingsLogic = (() => {
                 links = JSON.parse(settingsField.value);
             }
             else{
-                settings = JSON.parse(settingsField.value);
+                settingStorage = JSON.parse(settingsField.value);
+                for (const [key, value] of Object.entries(settingStorage)) {
+                    if(settings.hasOwnProperty(key)){
+                        settings[key] = value;
+                    };
+                  };
             }
             DOMLogic.toggleSettings();
             DOMLogic.refresh();
