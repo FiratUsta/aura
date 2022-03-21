@@ -26,7 +26,9 @@ https://kazakazan.github.io/aura/</h2>
 
 <h2> Known Bugs </h2>
 
-* On your first visit, the page might be completely broken. Thankfully this is  an easy fix. Simply type `au:sr` in the searchbar and hit enter. The page should be fixed, to retain its fixed form in future visits, type `au:ss` and hit enter. I'm looking into the cause of this, hopefully I'll be able to fix it soon.
+~On your first visit, the page might be completely broken. Thankfully this is  an easy fix. Simply type `au:sr` in the searchbar and hit enter. The page should be fixed, to retain its fixed form in future visits, type `au:ss` and hit enter. I'm looking into the cause of this, hopefully I'll be able to fix it soon.~
+
+Seems the above issue is fixed. We'll see after further testing.
 
 ---
 
