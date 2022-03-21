@@ -42,6 +42,7 @@ https://kazakazan.github.io/aura/</h2>
   * Update pre-made themes.
   * More display image options (ability to position the image inside the display, filters etc.)
 * Improved functionality.
+  * Improve settings loader for better compatibility.
   * Weather widget with appropriate settings.
   * Text display widget with appropriate settings.
   * More utility functions (simple cli calculator, ~one-time search engine change etc.~). (One time search implemented.)
