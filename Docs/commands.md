@@ -92,51 +92,27 @@ These commands deal with changing various colors around the startpage. They all 
 
 ### `color-background || cb`
 
-Changes the background color to a given CSS color.
+Changes the dark mode or light mode background color to a given CSS color, depending on the mode you're currently on.
 
 Usage:
 
     cb <CSS color>
 
-### `color-background-light || cbl`
-
-Changes the light-mode background color to a given CSS color.
-
-Usage:
-
-    cbl <CSS color>
-
 ### `color-foreground || cf`
 
-Changes the foreground / text color to a given CSS color.
+Changes the dark mode or light foreground / text color to a given CSS color, depending on the mode you're currently on.
 
 Usage:
 
     cf <CSS color>
 
-### `color-foreground-light || cfl`
-
-Changes the light-mode foreground / text color to a given CSS color.
-
-Usage:
-
-    cfl <CSS color>
-
 ### `color-accent || ca`
 
-Changes the accent color used in the image border, searchbar border and searchbar decoration to a given CSS color.
+Changes the dark or light mode accent color used in the image border, searchbar border and searchbar decoration to a given CSS color, depending on the mode you're currently on.
 
 Usage:
 
     ca <CSS color>
-
-### `color-accent-light || cal`
-
-Changes the accent color used in the image border, searchbar border and searchbar decoration to a given CSS color.
-
-Usage:
-
-    cal <CSS color>
 
 ### `darkmode || dm`
 
@@ -175,19 +151,11 @@ These commands deal with the image on display at the center of the screen. For c
 
 ### `image-set || is`
 
-Changes the display image to an image from the given URL.
+Changes the display image of dark or light mode to an image from the given URL, depending on the mode you're currently on.
 
 Usage:
 
     is <image URL>
-
-### `image-set-light || isl`
-
-Changes the light-mode display image to an image from the given URL.
-
-Usage:
-
-    isl <image URL>
 
 ### `image-clear || ic`
 

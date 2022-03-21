@@ -300,7 +300,12 @@ const searchLogic = (() => {
                     case "color-background":
                     case "cb":
                         if(commandList.length === 2){
-                            settings["background"] = commandList[1];
+                            if(settings["currentMode"] === "dark"){
+                                settings["background"] = commandList[1];
+                            }
+                            else{
+                                settings["lmBackground"] = commandList[1];
+                            };
                             DOMLogic.refresh();   
                         }
                         else{
@@ -308,21 +313,15 @@ const searchLogic = (() => {
                         }
                         break;
 
-                    case "color-background-light":
-                    case "cbl":
-                        if(commandList.length === 2){
-                            settings["lmBackground"] = commandList[1];
-                            DOMLogic.refresh();   
-                        }
-                        else{
-                            errorMessage = 'Usage: "au:[cbl || color-background-light] <CSS color>"'
-                        }
-                        break;
-
                     case "color-foreground":
                     case "cf":
                         if(commandList.length === 2){
-                            settings["foreground"] = commandList[1];
+                            if(settings["currentMode"] === "dark"){
+                                settings["foreground"] = commandList[1];
+                            }
+                            else{
+                                settings["lmForeground"] = commandList[1];
+                            };
                             DOMLogic.refresh();
                         }
                         else{
@@ -330,58 +329,35 @@ const searchLogic = (() => {
                         }
                         break;
 
-                    case "color-foreground-light":
-                    case "cfl":
-                        if(commandList.length === 2){
-                            settings["lmForeground"] = commandList[1];
-                            DOMLogic.refresh();
-                        }
-                        else{
-                            errorMessage = 'Usage: "au:[cfl || color-foreground-light] <CSS color>"'
-                        }
-                        break;
-
                     case "color-accent":
                     case "ca":
                         if(commandList.length === 2){
-                            settings["accent"] = commandList[1];
+                            if(settings["currentMode"] === "dark"){
+                                settings["accent"] = commandList[1];
+                            }
+                            else{
+                                settings["lmAccent"] = commandList[1];
+                            };
                             DOMLogic.refresh();
                         }
                         else{
                             errorMessage = 'Usage: "au:[ca || color-accent] <CSS color>"'
                         }
                         break;
-                    
-                    case "color-accent-light":
-                    case "cal":
-                        if(commandList.length === 2){
-                            settings["lmAccent"] = commandList[1];
-                            DOMLogic.refresh();
-                        }
-                        else{
-                            errorMessage = 'Usage: "au:[cal || color-accent-light] <CSS color>"'
-                        }
-                        break;
 
                     case "image-set":
                     case "is":
                         if(commandList.length === 2){
-                            settings["image"] = commandList[1];
+                            if(settings["currentMode"] === "dark"){
+                                settings["image"] = commandList[1];
+                            }
+                            else{
+                                settings["lmImage"] = commandList[1];
+                            };
                             DOMLogic.refresh();
                         }
                         else{
                             errorMessage = 'Usage: "au:[is || image-set] <image URL>"'
-                        }
-                        break;
-
-                    case "image-set-light":
-                    case "isl":
-                        if(commandList.length === 2){
-                            settings["lmImage"] = commandList[1];
-                            DOMLogic.refresh();
-                        }
-                        else{
-                            errorMessage = 'Usage: "au:[isl || image-set-light] <image URL>"'
                         }
                         break;
                     
