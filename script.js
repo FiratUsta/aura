@@ -705,8 +705,9 @@ const settingsLogic = (() => {
     };
     
     const load = function () {
-        settingStorage = JSON.parse(window.localStorage.getItem("settings"));
-        if(settingStorage !== null){
+        let storedSettings = window.localStorage.getItem("settings");
+        if(storedSettings !== null){
+            settingStorage = JSON.parse(storedSettings);
             for (const [key, value] of Object.entries(settingStorage)) {
                 if(settings.hasOwnProperty(key)){
                     settings[key] = value;
