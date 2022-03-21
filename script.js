@@ -1,24 +1,28 @@
 // Global Vars
 let settings = {
+    // Searchbar Settings
     "searchEngine": "google",
     "searchbarPlaceholder": 'Enter command or search term, "au:help" for help.',
+    // Calendar Settings
     "clockMode": "24",
     "clockDisplay": "true",
     "dateDisplay": "true",
     "dayForm": "full",
+    // Theming Settings
     "background": "#000",
     "foreground": "#fff",
     "accent": "#d6d6d6",
     "image": "Assets/default.jpg",
-    "title": "Aura",
+    "lmBackground": "#fff",
+    "lmForeground": "#000",
+    "lmAccent": "#d6d6d6",
+    "lmImage": "Assets/defaultLight.jpg",
     "currentMode": "dark",
     "autoLightBegin": "0600",
     "autoLightEnd": "1800",
     "autoMode": "true",
-    "lmBackground": "#fff",
-    "lmForeground": "#000",
-    "lmAccent": "#d6d6d6",
-    "lmImage": "Assets/defaultLight.jpg"
+    // Misc. Settings
+    "title": "Aura"
 };
 
 let links = [
