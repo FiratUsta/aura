@@ -22,7 +22,6 @@ let settings = {
     "autoLightEnd": "1800",
     "autoMode": "true",
     // Misc. Settings
-    "title": "Aura",
     "displayLinkIndex": "true"
 };
 

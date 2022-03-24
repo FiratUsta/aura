@@ -27,8 +27,6 @@ As Light Mode
 
     {"lmBackground":"#050505","lmForeground":"white","lmAccent":"#303030","lmImage":"https://i.redd.it/0lqeqpk5dyn81.jpg"}
 
----
-
 ## Zen
 
 ### Screenshot
@@ -45,8 +43,6 @@ As Light Mode
 
     {"lmBackground":"#fdfdfd","lmForeground":"#050505","lmAccent":"#050505","lmImage":"https://i.redd.it/unh0bil5dyn81.jpg"}
 
----
-
 ## Golden Sun
 
 ### Screenshot
@@ -62,8 +58,6 @@ As Dark Mode
 As Light Mode
 
     {"lmBackground":"#000","lmForeground":"#e6c58d","lmAccent":"#6a6742","lmImage":"https://i.redd.it/yxz3zpk5dyn81.jpg"}
-
----
 
 ## Sky High
 
