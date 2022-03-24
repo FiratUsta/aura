@@ -21,7 +21,13 @@ and pasting them into the input field in the pop-up window.
 
 ### Settings
 
-    {"searchEngine":"google","searchbarPlaceholder":"Search...","clockMode":"24","clockDisplay":"true","background":"#050505","foreground":"white","accent":"#303030","image":"https://preview.redd.it/0lqeqpk5dyn81.jpg?width=5120&format=pjpg&auto=webp&s=dda1e15b68204ebd58683a6d821ba37607f8df8a","title":"Aura"}
+As Dark Mode
+
+    {"background":"#050505","foreground":"white","accent":"#303030","image":"https://i.redd.it/0lqeqpk5dyn81.jpg"}
+
+As Light Mode
+
+    {"lmBackground":"#050505","lmForeground":"white","lmAccent":"#303030","lmImage":"https://i.redd.it/0lqeqpk5dyn81.jpg"}
 
 ---
 
@@ -33,7 +39,13 @@ and pasting them into the input field in the pop-up window.
 
 ### Settings
 
-    {"searchEngine":"google","searchbarPlaceholder":"Search...","clockMode":"24","clockDisplay":"true","background":"#fdfdfd","foreground":"#050505","accent":"#050505","image":"https://preview.redd.it/unh0bil5dyn81.jpg?width=3840&format=pjpg&auto=webp&s=653121f08b920fafd36a22ddbf0d07c2f90237d1","title":"Aura"}
+As Dark Mode
+
+    {"background":"#fdfdfd","foreground":"#050505","accent":"#050505","image":"https://i.redd.it/unh0bil5dyn81.jpg"}
+
+As Light Mode
+
+    {"lmBackground":"#fdfdfd","lmForeground":"#050505","lmAccent":"#050505","lmImage":"https://i.redd.it/unh0bil5dyn81.jpg"}
 
 ---
 
@@ -45,7 +57,13 @@ and pasting them into the input field in the pop-up window.
 
 ### Settings
 
-    {"searchEngine":"google","searchbarPlaceholder":"Search...","clockMode":"24","clockDisplay":"true","background":"#000","foreground":"#e6c58d","accent":"#6a6742","image":"https://i.redd.it/yxz3zpk5dyn81.jpg","title":"Aura"}
+As Dark Mode
+
+    {"background":"#000","foreground":"#e6c58d","accent":"#6a6742","image":"https://i.redd.it/yxz3zpk5dyn81.jpg"}
+
+As Light Mode
+
+    {"lmBackground":"#000","lmForeground":"#e6c58d","lmAccent":"#6a6742","lmImage":"https://i.redd.it/yxz3zpk5dyn81.jpg"}
 
 ---
 
@@ -57,4 +75,10 @@ and pasting them into the input field in the pop-up window.
 
 ### Settings
 
-    {"searchEngine":"google","searchbarPlaceholder":"Search...","clockMode":"24","clockDisplay":"true","background":"#dbf8ff","foreground":"#294f65","accent":"#4b8cb2","image":"https://preview.redd.it/dprwiqk5dyn81.png?width=1920&format=png&auto=webp&s=716966b4f9c674671f7d6eaf0461c799583ac187","title":"Aura"}
+As Dark Mode
+
+    {"background":"#dbf8ff","foreground":"#294f65","accent":"#4b8cb2","image":"https://i.redd.it/dprwiqk5dyn81.png"}
+
+As Light Mode
+
+    {"lmBackground":"#dbf8ff","lmForeground":"#294f65","lmAccent":"#4b8cb2","lmImage":"https://i.redd.it/dprwiqk5dyn81.png"}
