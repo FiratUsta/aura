@@ -20,8 +20,6 @@ Learn how to customize your link list with <a href="https://github.com/KazaKazan
 
 Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/templates.md">pre-made themes</a>.
 
----
-
 <h2> Planned Features </h2>
 
 * General layout improvements.
