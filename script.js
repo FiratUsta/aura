@@ -8,6 +8,18 @@ let settings = {
     "clockDisplay": "true",
     "dateDisplay": "true",
     "dayForm": "full",
+    // Quote Settings
+    "quote": "Welcome to Aura",
+    "quoteDisplay": "true",
+    // Weather Settings
+    "tempUnit": "c",
+    "tempDisplay": "false",
+    "weatherCity": "",
+    "weatherKey": "",
+    "weatherDisplay": "false",
+    "weatherWidgetDisplay": "true",
+    // Top Bar Settings
+    "barOrder": ["clock","quote","weather"],
     // Theming Settings
     "background": "#000",
     "foreground": "#fff",
@@ -552,11 +564,112 @@ const searchLogic = (() => {
     };
 })();
 
+// Top Bar Logic
+const topBar = (() => {
+
+    // DOM vars
+    const topBarDiv = document.getElementById("topBar");
+    const clockContaier = document.getElementById("clockContainer");
+    const quoteContaier = document.getElementById("quoteContainer");
+    const weatherContaier = document.getElementById("weatherContainer");
+    const firstDivider = document.getElementById("firstDivider");
+    const secondDivider = document.getElementById("secondDivider");
+
+    // Other vars
+    let visibleWidgets;
+
+    const _getVisibility = function () {
+        visibleWidgets = 0;
+        if(settings["clockDisplay"] === "true" || settings["dateDisplay"] === true){
+            visibleWidgets += 1;
+        };
+        if(settings["quoteDisplay"] === "true"){
+            visibleWidgets += 1;
+        };
+        if(settings["weatherWidgetDisplay"] === "true"){
+            visibleWidgets += 1;
+        };
+    };
+
+    const _reorder = function () {
+        for(let i = 0; i < 3; i++){
+            let element;
+            let order;
+            switch(settings["barOrder"][i]){
+                case "clock":
+                    element = clockContaier;
+                    break;
+                case "quote":
+                    element = quoteContaier;
+                    break;
+                case "weather":
+                    element = weatherContaier;
+                    break;
+            };
+            switch(i){
+                case 0:
+                    order = "topFirst";
+                    break;
+                case 1:
+                    order = "topSecond";
+                    break;
+                case 2:
+                    order = "topThird";
+                    break;
+            };
+            console.log(element);
+            element.className = order;
+        };
+    };
+
+    const _rearrange = function () {
+        switch(visibleWidgets){
+            case 1:
+                topBarDiv.style.gridTemplateAreas = '"second fDivider first sDivider third"';
+                firstDivider.innerText = "";
+                secondDivider.innerText = "";
+                break;
+            case 2:
+                topBarDiv.style.gridTemplateAreas = '"first fDivider third sDivider second"';
+                firstDivider.innerText = "";
+                secondDivider.innerText = "";
+                break;
+            case 3:
+                topBarDiv.style.gridTemplateAreas = '"first fDivider second sDivider third"';
+                firstDivider.innerText = "|";
+                secondDivider.innerText = "|";
+                break;
+        };
+    };
+
+    const refresh = function () {
+        _getVisibility();
+        _reorder();
+        _rearrange();
+    };
+
+    const updateQuote = function () {
+        quoteContaier.innerText = settings["quote"];
+    };
+
+    const updateClock = function (timeString) {
+        clockContaier.innerText = timeString;
+    };
+
+    const updateWeather = function (weatherString) {
+        weatherContaier.innerText = weatherString;
+    };
+
+    return{
+        refresh,
+        updateQuote,
+        updateClock,
+        updateWeather
+    }
+})();
+
 // Clock Logic
 const clock = (() => {
-    // DOM Vars
-    const clockContainer = document.getElementById("clockContainer");
-
     // Naming Vars
     const days = ["Sunday", "Monday","Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -587,7 +700,7 @@ const clock = (() => {
             clockText += day + ", " + months[today.getMonth()] + " " + today.getDate()
         };
         if(settings["dateDisplay"] === "true" && settings["clockDisplay"] === "true"){
-            clockText += " | " ;
+            clockText += " - " ;
         };
         let h = today.getHours();
         let m = today.getMinutes();
@@ -602,7 +715,7 @@ const clock = (() => {
                 };
             }
         };
-        clockContainer.innerText = clockText
+        topBar.updateClock(clockText);
         if(settings["autoMode"] === "true"){checkLightMode(h+String(m).padStart(2,"0"))};
         setTimeout(displayTime, 1000);
     };
@@ -856,4 +969,6 @@ const settingsLogic = (() => {
 // Start
 settingsLogic.load();
 DOMLogic.refresh();
+topBar.updateQuote();
+topBar.refresh();
 clock.displayTime();

@@ -38,7 +38,29 @@ input, textarea, select {
     gap: 20px;
     font-family: 'Old Standard TT', serif;
 }
+#topBar{
+    width: min(80%, 1000px);
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    grid-template-columns: 32% 2% 32% 2% 32%;
+    grid-template-areas: "first fDivider second sDivider third";
+}
+#topBar a{
+    color: var(--foreground);
+}
+#firstDivider{
+    grid-area: fDivider;
+    user-select: none;
+}
+#secondDivider{
+    grid-area: sDivider;
+    user-select: none;
+}
 #clockContainer{
+    user-select: none;
+}
+#quoteContainer{
     user-select: none;
 }
 #image{
@@ -167,6 +189,15 @@ input, textarea, select {
     position: absolute;
     bottom: 0;
     left: 0;
+}
+.topFirst{
+    grid-area: first;
+}
+.topSecond{
+    grid-area: second;
+}
+.topThird{
+    grid-area: third;
 }
 .hidden{
     display: none !important;
