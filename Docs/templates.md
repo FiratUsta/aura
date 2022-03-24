@@ -1,4 +1,4 @@
-# Setting Templates
+# Theme Templates
 
 You can use these pre-made settings by doing
 
