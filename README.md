@@ -17,11 +17,13 @@ Learn how to customize your link list with <a href="https://github.com/KazaKazan
 Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/templates.md">pre-made themes</a>.
 
 ---
+---
 
-<h2 align="center"> Live Page
+<h2 align="center" border-bottom="none"> Live Page
 
 https://kazakazan.github.io/aura/</h2>
 
+---
 ---
 
 <h2> Planned Features </h2>
