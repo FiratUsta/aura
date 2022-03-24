@@ -19,7 +19,8 @@ let settings = {
     "weatherDisplay": "true",
     "weatherWidgetDisplay": "true",
     // Top Bar Settings
-    "barOrder": ["clock","quote","weather"],
+    "barOrder": ["clock", "quote", "weather"],
+    "activeOrder": ["clock", "quote", "weather"],
     // Theming Settings
     "background": "#000",
     "foreground": "#fff",
@@ -174,6 +175,7 @@ const searchLogic = (() => {
                                     components.forEach(component => {
                                         settings[component] = commandList[2];
                                     });
+                                    topBar.refresh();
                                 }
                                 else{
                                     errorMessage = "Invalid visibility argument."
@@ -286,6 +288,9 @@ const searchLogic = (() => {
                         break;
                     
                     // Top bar commands
+                    case "topbar-arrange":
+                    case "ta":
+                        break;
 
                     // Searchbar commands
                     case "search-engine":
@@ -678,26 +683,44 @@ const topBar = (() => {
     const secondDivider = document.getElementById("secondDivider");
 
     // Other vars
-    let visibleWidgets;
+    let visibleWidgetCount;
+    let visibleWidgets = [];
 
     const _getVisibility = function () {
-        visibleWidgets = 0;
-        if(settings["clockDisplay"] === "true" || settings["dateDisplay"] === true){
-            visibleWidgets += 1;
+        visibleWidgetCount = 0;
+        visibleWidgets = [];
+        if(settings["clockDisplay"] === "true" || settings["dateDisplay"] === "true"){
+            visibleWidgetCount += 1;
+            visibleWidgets.push("clock");
         };
         if(settings["quoteDisplay"] === "true"){
-            visibleWidgets += 1;
+            visibleWidgetCount += 1;
+            visibleWidgets.push("quote");
         };
         if(settings["weatherWidgetDisplay"] === "true"){
-            visibleWidgets += 1;
+            visibleWidgetCount += 1;
+            visibleWidgets.push("weather");
         };
     };
 
     const _reorder = function () {
+        settings["activeOrder"] = settings["barOrder"];
+        const sortedArray = [];
+        settings["activeOrder"].forEach(element => {
+            if(visibleWidgets.includes(element)){
+                sortedArray.push(element);
+            };
+        });
+        settings["activeOrder"].forEach(element => {
+            if(!visibleWidgets.includes(element)){
+                sortedArray.push(element);
+            };
+        });
+        settings["activeOrder"] = sortedArray;
         for(let i = 0; i < 3; i++){
             let element;
             let order;
-            switch(settings["barOrder"][i]){
+            switch(settings["activeOrder"][i]){
                 case "clock":
                     element = clockContaier;
                     break;
@@ -724,18 +747,21 @@ const topBar = (() => {
     };
 
     const _rearrange = function () {
-        switch(visibleWidgets){
+        switch(visibleWidgetCount){
             case 1:
+                topBarDiv.style.gridTemplateColumns = "0 0 100% 0 0";
                 topBarDiv.style.gridTemplateAreas = '"second fDivider first sDivider third"';
                 firstDivider.innerText = "";
                 secondDivider.innerText = "";
                 break;
             case 2:
+                topBarDiv.style.gridTemplateColumns = "50% 0 0 0 50%";
                 topBarDiv.style.gridTemplateAreas = '"first fDivider third sDivider second"';
                 firstDivider.innerText = "";
                 secondDivider.innerText = "";
                 break;
             case 3:
+                topBarDiv.style.gridTemplateColumns = "32% 2% 32% 2% 32%";
                 topBarDiv.style.gridTemplateAreas = '"first fDivider second sDivider third"';
                 firstDivider.innerText = "|";
                 secondDivider.innerText = "|";
@@ -777,7 +803,7 @@ const topBar = (() => {
 const weatherWidget = (() => {
 
     const _getData = async function () {
-        const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${settings["weatherCity"]}&limit=1&appid=${settings["weatherKey"]}`;
+        const geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${settings["weatherCity"]}&limit=1&appid=${settings["weatherKey"]}`;
         const response = await fetch(geoURL);
         const coordData = await response.json();
         return coordData[0];

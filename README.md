@@ -22,15 +22,12 @@ Learn how to personalize your startpage with <a href="https://github.com/KazaKaz
 
 <h2> Planned Features </h2>
 
-* General layout improvements.
-  * Better multi-line link list support.
 * More customization options.
   * Allow the customization of the corner decorations (change shape, hide/show etc.).
   * More display image options (ability to position the image inside the display, filters etc.)
 * Improved functionality.
-  * Weather widget with appropriate settings.
-  * Text display widget with appropriate settings.
-  * Better feedback when commands are carried out.
+  * Ability to export only theme settings (colors, image, corner decorations).
+  * Better command feedback.
 * GUI settings.
   * GUI settings may be implemented after all other planned features are implemented.
   
