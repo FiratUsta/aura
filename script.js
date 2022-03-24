@@ -640,7 +640,7 @@ const searchLogic = (() => {
                     
                     case "help":
                     case "h":
-                        errorMessage = 'Please refer to the <a href="https://github.com/KazaKazan/aura/blob/main/commands.md">documentation</a> for help.'
+                        errorMessage = 'Please refer to the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md">documentation</a> for help.'
                         break;
 
                     default:

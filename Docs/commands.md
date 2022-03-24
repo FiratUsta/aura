@@ -33,6 +33,8 @@ While both forms of the commands will be shown in the document, the usage/exampl
 
 * [Utility Commands](#-utility-commands)
 
+* [Widget & Top Bar](#widgets--top-bar)
+
 * [Theming](#theming)
 
 * [Link List Commands](#link-list-commands)
