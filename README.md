@@ -22,8 +22,6 @@ Learn how to personalize your startpage with <a href="https://github.com/KazaKaz
 
 https://kazakazan.github.io/aura/</h2>
 
----
-
 <h2> Planned Features </h2>
 
 * General layout improvements.
