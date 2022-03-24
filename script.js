@@ -13,10 +13,10 @@ let settings = {
     "quoteDisplay": "true",
     // Weather Settings
     "tempUnit": "c",
-    "tempDisplay": "false",
+    "tempDisplay": "true",
     "weatherCity": "",
     "weatherKey": "",
-    "weatherDisplay": "false",
+    "weatherDisplay": "true",
     "weatherWidgetDisplay": "true",
     // Top Bar Settings
     "barOrder": ["clock","quote","weather"],
@@ -184,6 +184,108 @@ const searchLogic = (() => {
                             errorMessage = 'Usage: "au:[cd || calendar-display] <component> <visibility>"'
                         };
                         break;
+                    
+                    // Quote commands
+                    case "quote-set":
+                    case "qs":
+                        if(commandList.length >= 2){
+                            const quote = _cmdParser(commandList, 1, 0);
+                            settings["quote"] = quote;
+                            topBar.updateQuote();
+                            break;
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[qs || quote-set] <quote text>"'
+                        }
+                        break;
+                    
+                    case "quote-display":
+                    case "qd":
+                        if(settings["quoteDisplay"] === "true"){
+                            settings["quoteDisplay"] = "false";
+                            topBar.updateQuote("");
+                            topBar.refresh();
+                        }
+                        else{
+                            settings["quoteDisplay"] = "true";
+                            topBar.updateQuote(settings["quote"]);
+                            topBar.refresh();
+                        }
+                        break;
+
+                    // Weather commands
+                    case "weather-setup":
+                    case "ws":
+                        if(commandList.length >= 3){
+                            const cityName = _cmdParser(commandList, 1);
+                            settings["weatherCity"] = cityName;
+                            settings["weatherKey"] = commandList[commandList.length-1];
+                            weatherWidget.setWeather();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[ws || weather-setup] <city name> <API key>"'
+                        }
+                        break;
+                    
+                    case "weather-display":
+                    case "wd":
+                        if(commandList.length === 3){
+                            let component = "";
+                            switch(commandList[1]){
+                                case "t":
+                                    component = "temp";
+                                    break;
+                                case "s":
+                                    component = "status";
+                                    break;
+                                case "a":
+                                    component = "widget";
+                                    break;
+                                default:
+                                    errorMessage = "Invalid component argument.";
+                                    break;
+                            };
+                            if(component === ""){
+                                break;
+                            }
+                            else{
+                                if(commandList[2] === "true" || commandList[2] === "false"){
+                                    switch(component){
+                                        case "temp":
+                                            settings["tempDisplay"] = commandList[2];
+                                            break;
+                                        case "status":
+                                            settings["weatherDisplay"] = commandList[2];
+                                            break;
+                                        case "widget":
+                                            settings["weatherWidgetDisplay"] = commandList[2];
+                                            break;
+                                    };
+                                weatherWidget.setWeather();
+                                topBar.refresh();
+                                }
+                                else{
+                                    errorMessage = "Invalid visibility argument."
+                                };
+                            };
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[wd || weather-display] <component> <visibility>"'
+                        };
+                        break;
+                    
+                    case "weather-unit":
+                    case "u":
+                        if(settings["tempUnit"] === "c"){
+                            settings["tempUnit"] = "f";
+                        }
+                        else{
+                            settings["tempUnit"] = "c";
+                        }
+                        weatherWidget.setWeather();
+                        break;
+                    
+                    // Top bar commands
 
                     // Searchbar commands
                     case "search-engine":
@@ -617,7 +719,6 @@ const topBar = (() => {
                     order = "topThird";
                     break;
             };
-            console.log(element);
             element.className = order;
         };
     };
@@ -649,7 +750,12 @@ const topBar = (() => {
     };
 
     const updateQuote = function () {
-        quoteContaier.innerText = settings["quote"];
+        if(settings["quoteDisplay"] === "true"){
+            quoteContaier.innerText = settings["quote"];
+        }
+        else{
+            quoteContaier.innerText = "";
+        };
     };
 
     const updateClock = function (timeString) {
@@ -665,6 +771,70 @@ const topBar = (() => {
         updateQuote,
         updateClock,
         updateWeather
+    }
+})();
+
+const weatherWidget = (() => {
+
+    const _getData = async function () {
+        const geoURL = `http://api.openweathermap.org/geo/1.0/direct?q=${settings["weatherCity"]}&limit=1&appid=${settings["weatherKey"]}`;
+        const response = await fetch(geoURL);
+        const coordData = await response.json();
+        return coordData[0];
+    };
+
+    const _getWeather = async function () {
+        const coordData = await _getData();
+        const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${coordData["lat"]}&lon=${coordData["lon"]}&appid=${settings["weatherKey"]}`;
+        const response = await fetch(weatherURL);
+        const weatherData = await response.json();
+        return {
+            "tempKelvin": weatherData["main"]["temp"],
+            "weatherStatus": weatherData["weather"][0]["description"]
+        };
+    };
+
+    const _tempConvert = function (tempString) {
+        const tempFloat = parseFloat(tempString);
+        let tempText;
+        if(settings["tempUnit"] === "c"){
+            tempText = Math.round(tempFloat - 273.15) + "°C";
+        }
+        else{
+            tempText = Math.round(((tempFloat - 273.15) * 1.8) + 32) + "°F";
+        };
+        return tempText;
+    };
+
+    const _createText = async function () {
+        const data = await _getWeather();
+        let text = "";
+        if(settings["tempDisplay"] === "true"){
+            text += _tempConvert(data["tempKelvin"]);
+        };
+        if(settings["weatherDisplay"] === "true"){
+            if(settings["tempDisplay"] === "true"){
+                text += " - ";
+            };
+            text += data["weatherStatus"];
+        };
+        return text;
+    };
+
+    const setWeather = async function () {
+        if(settings["weatherWidgetDisplay"] === "true"){
+            if(settings["weatherKey"] != "" && settings["weatherCity"] != ""){
+                const weatherText = await _createText();
+                topBar.updateWeather(weatherText);
+            };
+        }
+        else{
+            topBar.updateWeather("");
+        };
+    };
+
+    return{
+        setWeather
     }
 })();
 
@@ -972,3 +1142,4 @@ DOMLogic.refresh();
 topBar.updateQuote();
 topBar.refresh();
 clock.displayTime();
+weatherWidget.setWeather();

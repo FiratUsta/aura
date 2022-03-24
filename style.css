@@ -57,12 +57,10 @@ input, textarea, select {
     grid-area: sDivider;
     user-select: none;
 }
-#clockContainer{
+#clockContainer, #quoteContainer, #weatherContainer {
     user-select: none;
 }
-#quoteContainer{
-    user-select: none;
-}
+
 #image{
     aspect-ratio: 4/1;
     width: min(80%, 1000px);
