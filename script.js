@@ -277,7 +277,7 @@ const searchLogic = (() => {
                         break;
                     
                     case "weather-unit":
-                    case "u":
+                    case "wu":
                         if(settings["tempUnit"] === "c"){
                             settings["tempUnit"] = "f";
                         }
@@ -290,6 +290,24 @@ const searchLogic = (() => {
                     // Top bar commands
                     case "topbar-arrange":
                     case "ta":
+                        if(commandList.length === 4){
+                            const sortedArray = [];
+                            for(let i = 1; i < 4; i++){
+                                if(commandList[i] === "clock" || commandList[i] === "quote" || commandList[i] === "weather"){
+                                    sortedArray.push(commandList[i]);
+                                };
+                            };
+                            if(sortedArray.length === 3){
+                                settings["barOrder"] = sortedArray;
+                                topBar.refresh();
+                            }
+                            else{
+                                errorMessage = 'Accepted widget names are "clock", "quote" and "weather".'
+                            };
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[ta || topbar-arrange] <first widget> <second widget> <third widget>"'
+                        }
                         break;
 
                     // Searchbar commands
@@ -466,6 +484,11 @@ const searchLogic = (() => {
                     case "settings-import":
                     case "ims":
                         settingsLogic.importManager("settings");
+                        break;
+                    
+                    case "theme-export":
+                    case "ext":
+                        settingsLogic.exportManager("theme");
                         break;
                     
                     // Theming Commands                    
@@ -1107,11 +1130,23 @@ const settingsLogic = (() => {
         location.reload();
     };
 
-    const exportManager= function (mode) {
+    const exportManager = function (mode) {
         settingsButton.onclick = () => DOMLogic.toggleSettings();
         settingsTitle.innerText = "Please save the below text.";
         if(mode==="links"){
             settingsField.value = JSON.stringify(links);
+        }
+        else if(mode==="theme"){
+            let theme = {};
+            theme["background"] = settings["background"];
+            theme["foreground"] = settings["foreground"];
+            theme["accent"] = settings["accent"];
+            theme["image"] = settings["image"];
+            theme["lmBackground"] = settings["lmBackground"];
+            theme["lmForeground"] = settings["lmForeground"];
+            theme["lmAccent"] = settings["lmAccent"];
+            theme["lmImage"] = settings["lmImage"];
+            settingsField.value = JSON.stringify(theme);
         }
         else{
             settingsField.value = JSON.stringify(settings);

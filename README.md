@@ -26,7 +26,6 @@ Learn how to personalize your startpage with <a href="https://github.com/KazaKaz
   * Allow the customization of the corner decorations (change shape, hide/show etc.).
   * More display image options (ability to position the image inside the display, filters etc.)
 * Improved functionality.
-  * Ability to export only theme settings (colors, image, corner decorations).
   * Better command feedback.
 * GUI settings.
   * GUI settings may be implemented after all other planned features are implemented.

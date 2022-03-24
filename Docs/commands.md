@@ -68,22 +68,6 @@ Usage:
 
     h
 
-### `clock-mode || cm`
-
-Toggles between the 24-hour and 12-hour modes of the time display.
-
-Usage:
-
-    cm
-
-### `date-form || df`
-
-Toggles between long-form and short-form modes for the calendar day display.
-
-Usage:
-
-    df
-
 ### `search-engine || se`
 
 Changes the search engine of the searchbar to the inputted service. Currently the supported engines are `duckduckgo`, `google` and `wikipedia`.
@@ -107,6 +91,112 @@ Go-to link is another special function, it can only be used in search mode and a
 Usage:
 
     !l <link index>
+
+# Widgets & Top Bar
+
+Widgets are the text display on top of your image. They can be turned on or off, and some allow certain parts of themselves to be turned on or off individually and offer certain settings. The area where your widgets can be seen is called the top bar and it allows the arrangement of widgets within it.
+
+## Top Bar Commands
+
+The top bar automatically distributes the visible widgets on the area it has available, it also displays dividers as needed.
+
+### `topbar-arrange || ta`
+
+Arranges the widget order in the top bar. For the widget arguments, the accepted values are `clock`, `quote` and `weather`.
+
+Usage:
+
+    ta clock weather widget
+
+## Calender Commands
+
+### `clock-mode || cm`
+
+Toggles between the 24-hour and 12-hour modes of the time display.
+
+Usage:
+
+    cm
+
+### `date-form || df`
+
+Toggles between long-form and short-form modes for the calendar day display.
+
+Usage:
+
+    df
+
+### `clock-display || cd`
+
+Toggles date and clock visibilities in the calendar. For the component argument, use `c` for the clock, `d` for the date and `a` for both. For the visibility argument, use `true` for visible and `false` for hidden.
+
+Usage:
+
+    cd <component> <visibility>
+
+Example:
+
+    #This command will hide the clock while keeping the date at the current setting.
+    cd c false
+
+    #This command will show both components.
+    cd a true
+
+## Quote Commands
+
+The quote widget is a widget that displays a static string in your top bar. 
+
+### `quote-set || qs`
+
+Sets the quote text to the inputted string.
+
+Usage:
+
+    qs <quote text>
+
+### `quote-display || qd`
+
+Toggles the visibility of the quote widget.
+
+Usage:
+
+    qd
+
+## Weather Commands
+
+The weather widget displays the weather status and the temperature in a given city. It's powered by [OpenWeatherMap](https://openweathermap.org/). To set it up, you need to sign up to OpenWeatherMap and get an API key. The free keys are good enough for this purpose as aura only makes API calls when the page is first loaded or when certain weather widget settings are changed.
+
+### `weather-setup || ws`
+
+Sets up the weather widget with the given city and API key. 
+
+Usage:
+
+    ws <city name> <API key>
+
+### `weather-display || wd`
+
+Toggles temperature and status visibilities in the widget. For the component argument, use `t` for temperature, `s` for the status and `a` for both. For the visibility argument, use `true` for visible and `false` for hidden.
+
+Usage:
+
+    wd <component> <visibility>
+
+Example:
+
+    #This command will hide the temperature while keeping the status.
+    wd t false
+
+    #This command will show both components.
+    wd a true
+
+### `weather-unit || wu`
+
+Toggles between Celcius(°C) and Fahrenheit(°F) temperature.
+
+Usage:
+
+    wu
 
 # Theming
 
@@ -169,6 +259,7 @@ Example:
 
     #This command will turn the auto-lightmode off.
     lma false
+
 ## Image Commands
 
 These commands deal with the image on display at the center of the screen. For custom images, the recommended ratio is 4:1 to avoid any cutoffs.
@@ -201,21 +292,13 @@ Usage:
 
     sp <placeholder text>
 
-### `clock-display || cd`
+### `theme-export || ext`
 
-Toggles date and clock visibilities in the calendar. For the component argument, use `c` for the clock, `d` for the date and `a` for both. For the visibility argument, use `true` for visible and `false` for hidden.
+Exports only the theme settings such as color and image. Exported themes can be imported with the `settings-import || ims` command without affecting the other settings.
 
 Usage:
 
-    cd <component> <visibility>
-
-Example:
-
-    #This command will hide the clock while keeping the date at the current setting.
-    cd c false
-
-    #This command will show both components.
-    cd a true
+    ext
 
 # Link List Commands
 
