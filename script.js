@@ -28,7 +28,7 @@ let settings = {
 
 let links = [
     ["Source","https://github.com/KazaKazan/aura"],
-    ["Documentation","https://github.com/KazaKazan/aura/blob/main/commands.md"],
+    ["Documentation","https://github.com/KazaKazan/aura/blob/main/Docs/commands.md"],
     ["Other Projects","https://github.com/KazaKazan/"],
 ]
 
