@@ -84,6 +84,14 @@ Usage:
 
     !<engine> <search query>
 
+### Go-to link
+
+Go-to link is another special function, it can only be used in search mode and allows the user to go to a specific link with a command instead of clicking on it. Like one time search, it doesn't need to be prefixed with `au:` to be used in search mode.
+
+Usage:
+
+    !l <link index>
+
 # Theming
 
 ## Color Commands

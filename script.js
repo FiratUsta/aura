@@ -83,6 +83,25 @@ const searchLogic = (() => {
                     return;
             }
         };
+        if(/^!l /.test(input) && cmdMode === false){
+            const linkIndex = parseInt(input.slice(3));
+            if(isNaN(linkIndex)){
+                errorMessage = "The link index must be a number.";
+                errorMsg.innerHTML = errorMessage;
+                searchBar.focus();
+                return;
+            }
+            else if(isBetween(linkIndex,1,links.length)){
+                window.location = links[linkIndex-1][1];
+                return;
+            }
+            else{
+                errorMessage = "Link " + linkIndex + " doesn't exist.";
+                errorMsg.innerHTML = errorMessage;
+                searchBar.focus();
+                return;
+            };
+        };
         if(/^au:/.test(input) || cmdMode === true){
             let errorMessage = "";
             let commandList;
@@ -102,7 +121,7 @@ const searchLogic = (() => {
                         }
                         else{
                             settings["clockMode"] = "24";
-                        }
+                        };
                         break;
                     
                     case "date-form":
