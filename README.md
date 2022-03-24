@@ -8,7 +8,7 @@
 
 https://kazakazan.github.io/aura/</h2>
 
-Aura is a minimal, customizable and functional startpage designed to be used alongside with browser extensions such as <a href="https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/">New Tab Override</a>  in order to have a personalized startpage without the hassle of self-hosting.
+Aura is a minimal, customizable, functional and keyboard/command centric startpage designed to be used alongside with browser extensions such as <a href="https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/">New Tab Override</a>  in order to have a personalized startpage without the hassle of self-hosting.
 
 It's especially useful if you want to use the same startpage with multiple machines/browsers as the list of links can be changed on a per-browser basis without needing to touch any HTML or hosting multiple versions.
 
