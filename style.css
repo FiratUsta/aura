@@ -79,7 +79,6 @@ input, textarea, select {
 #searchbar{
     width: 98%;
     height: 20px;
-    margin-top: 50px;
     border: none;
     border-bottom: 2px solid var(--accent-one);
     background-color: var(--background);
@@ -89,8 +88,10 @@ input, textarea, select {
     outline: none;
 }
 #errorMessage{
-    color: red;
+    color: var(--foreground);
     width: min(80%, 1000px);
+    height: 16px;
+    margin-top: 10px;
 }
 #errorMessage a{
     color: var(--foreground);
