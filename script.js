@@ -22,7 +22,8 @@ let settings = {
     "autoLightEnd": "1800",
     "autoMode": "true",
     // Misc. Settings
-    "title": "Aura"
+    "title": "Aura",
+    "displayLinkIndex": "true"
 };
 
 let links = [
@@ -280,6 +281,18 @@ const searchLogic = (() => {
                         }
                         else{
                             errorMessage = 'Usage: "au:[lw || link-swap] <link index> <link index>"'
+                        };
+                        break;
+                    
+                    case "links-display-index":
+                    case "ldi":
+                        if(settings["displayLinkIndex"] === "true"){
+                            settings["displayLinkIndex"] = "false";
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            settings["displayLinkIndex"] = "true";
+                            DOMLogic.refresh();
                         };
                         break;
                     
@@ -613,7 +626,13 @@ const DOMLogic = (() => {
             newLink = document.createElement("a");
             newLink.setAttribute("tabindex","-1");
             newLink.setAttribute("href",link[1]);
-            newLink.innerText = link[0];
+            if(settings["displayLinkIndex"] === "true"){
+                newLink.innerText = links.indexOf(link) + 1 + ") ";
+            }
+            else{
+                newLink.innerText = "";
+            };
+            newLink.innerText += link[0];
             linkContainer.appendChild(newLink);
         });
         // Set page colors and the image

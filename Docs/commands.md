@@ -252,6 +252,14 @@ Usage:
 
     lw <link index> <link index>
 
+### `links-display-index || ldi`
+
+Toggles between showing and hiding the link index at the start of each link in the link list.
+
+Usage:
+
+    ldi
+
 ### `links-export || exl`
 
 Brings up a pop-up window that displays a string which can be stored by the user in order to save their link list.
