@@ -26,6 +26,22 @@ The below show command can be used as well:
 
 While both forms of the commands will be shown in the document, the usage/examples will use the short-form versions of the commands. For more complex commands, examples will be shown as well.
 
+----
+----
+
+# Index
+
+* [Utility Commands](#-utility-commands)
+
+* [Theming](#theming)
+
+* [Link List Commands](#link-list-commands)
+
+* [Settings](#settings)
+
+----
+----
+
 # Utility Commands
 
 ### `terminal-mode || tm`
