@@ -4,6 +4,10 @@
 
 ![Preview](/Docs/Templates/default.png)
 
+<h2 align="center"> Live Page
+
+https://kazakazan.github.io/aura/</h2>
+
 Aura is a minimal, customizable and functional startpage designed to be used alongside with browser extensions such as <a href="https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/">New Tab Override</a>  in order to have a personalized startpage without the hassle of self-hosting.
 
 It's especially useful if you want to use the same startpage with multiple machines/browsers as the list of links can be changed on a per-browser basis without needing to touch any HTML or hosting multiple versions.
@@ -17,10 +21,6 @@ Learn how to customize your link list with <a href="https://github.com/KazaKazan
 Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/templates.md">pre-made themes</a>.
 
 ---
-
-<h2 align="center"> Live Page
-
-https://kazakazan.github.io/aura/</h2>
 
 <h2> Planned Features </h2>
 
