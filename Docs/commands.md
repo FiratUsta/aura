@@ -252,6 +252,19 @@ Usage:
 
     lw <link index> <link index>
 
+### `link-insert || li`
+
+Takes a link at the given index and inserts it at another index.
+
+Usage:
+
+    li <link index> <index insert>
+
+Example:
+
+    #This command will take the 5th link on the link list, insert it as the 2nd list and push the previously 2nd link and all other links that follow 1 number up.
+    li 5 2 
+
 ### `links-display-index || ldi`
 
 Toggles between showing and hiding the link index at the start of each link in the link list.

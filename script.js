@@ -284,6 +284,23 @@ const searchLogic = (() => {
                         };
                         break;
                     
+                    case "link-insert":
+                    case "li":
+                        if(commandList.length === 3){
+                            const firstIndex = parseInt(commandList[1]) - 1;
+                            const secondIndex = parseInt(commandList[2]) - 1;
+                            if(isNaN(firstIndex) || isNaN(secondIndex)){
+                                errorMessage = "Both arguments need to be numbers."
+                            }
+                            else{
+                                errorMessage = DOMLogic.insertLink(firstIndex, secondIndex);
+                            }
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[li || link-insert] <link index> <insert index>"'
+                        };
+                        break;
+                    
                     case "links-display-index":
                     case "ldi":
                         if(settings["displayLinkIndex"] === "true"){
@@ -715,6 +732,22 @@ const DOMLogic = (() => {
         };
     };
 
+    const insertLink = function (lIndex, iIndex){
+        if(links.length > 0){
+            if(isBetween(lIndex,0,links.length-1)){
+                const link = links[lIndex];
+                links.splice(lIndex, 1);
+                links.splice(iIndex, 0, link);
+                refresh()
+                return "";
+            }
+            else{
+                return "Link " + (lIndex + 1) + " doesn't exist.";
+            };
+        };
+        return "The link list is empty."
+    };
+
     const toggleSettings = function () {
         settingsWindow.classList.toggle("hidden");
     };
@@ -725,6 +758,7 @@ const DOMLogic = (() => {
         removeLink,
         setLink,
         swapLinks,
+        insertLink,
         toggleSettings
     };
 })();
