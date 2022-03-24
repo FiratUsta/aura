@@ -11,8 +11,6 @@ or
 
 and pasting them into the input field in the pop-up window.
 
----
-
 ## Waves
 
 ### Screenshot
