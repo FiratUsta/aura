@@ -86,6 +86,11 @@ Usage:
 
     !<engine> <search query>
 
+Example:
+
+    #Using this command in search mode will search for ducks on duckduckgo regardless of the search engine set in the settings.
+    !d ducks
+
 ### Go-to link
 
 Go-to link is another special function, it can only be used in search mode and allows the user to go to a specific link with a command instead of clicking on it. Like one time search, it doesn't need to be prefixed with `au:` to be used in search mode.
@@ -108,7 +113,7 @@ Arranges the widget order in the top bar. For the widget arguments, the accepted
 
 Usage:
 
-    ta clock weather widget
+    ta <widget> <widget> <widget>
 
 ## Calender Commands
 
