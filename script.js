@@ -825,6 +825,15 @@ const topBar = (() => {
 
 const weatherWidget = (() => {
 
+    const _capitalizeText = function (stringToCapitalize) {
+        const words = stringToCapitalize.toLowerCase().split(" ");
+        let returnString = "";
+        words.forEach(word => {
+            returnString += word[0].toUpperCase() + word.substring(1) + " ";
+        });
+        return  returnString;
+    };
+
     const _getData = async function () {
         const geoURL = `https://api.openweathermap.org/geo/1.0/direct?q=${settings["weatherCity"]}&limit=1&appid=${settings["weatherKey"]}`;
         const response = await fetch(geoURL);
@@ -865,7 +874,7 @@ const weatherWidget = (() => {
             if(settings["tempDisplay"] === "true"){
                 text += " - ";
             };
-            text += data["weatherStatus"];
+            text += _capitalizeText(data["weatherStatus"]);
         };
         return text;
     };
