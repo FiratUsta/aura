@@ -39,10 +39,10 @@ let settings = {
 };
 
 let links = [
-    ["Source","https://github.com/KazaKazan/aura"],
-    ["Documentation","https://github.com/KazaKazan/aura/blob/main/Docs/commands.md"],
-    ["Themes","https://github.com/KazaKazan/aura/blob/main/Docs/templates.md"],
-    ["Other Projects","https://github.com/KazaKazan/"],
+    ["Source","https://github.com/PrimaryCat/aura"],
+    ["Documentation","https://github.com/PrimaryCat/aura/blob/main/Docs/commands.md"],
+    ["Themes","https://github.com/PrimaryCat/aura/blob/main/Docs/templates.md"],
+    ["Other Projects","https://github.com/PrimaryCat/"],
 ]
 
 const isBetween = function (value,min,max,inclusive=true){
