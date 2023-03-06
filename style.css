@@ -154,6 +154,7 @@ input, textarea, select {
     position: absolute;
     width: min(90%, 1250px);
     height: max(70%, 400px);
+    padding: 10px;
 }
 /* Classes */
 .corner {
