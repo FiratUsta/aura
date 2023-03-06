@@ -35,8 +35,8 @@ input, textarea, select {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     font-family: 'Old Standard TT', serif;
+    gap: 2vh;
 }
 #topBar{
     width: min(80%, 1000px);
