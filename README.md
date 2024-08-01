@@ -6,7 +6,7 @@
 
 <h2 align="center"> Live Page
 
-https://kazakazan.github.io/aura/</h2>
+https://firatusta.github.io/aura/</h2>
 
 Aura is a minimal, customizable and keyboard/command centric startpage designed to be used alongside with browser extensions such as <a href="https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/">New Tab Override</a>  in order to have a personalized startpage without the hassle of self-hosting.
 
@@ -16,9 +16,9 @@ It's import/export capabilities also provide an easy way of transferring link li
 
 To start using Aura, head over to the live page and set it as your homepage/new tab page.
 
-Learn how to customize your link list with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#link-list-commands">the documentation</a>.
+Learn how to customize your link list with <a href="https://github.com/firatusta/aura/blob/main/Docs/commands.md#link-list-commands">the documentation</a>.
 
-Learn how to personalize your startpage with <a href="https://github.com/KazaKazan/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/KazaKazan/aura/blob/main/Docs/templates.md">pre-made themes</a>.
+Learn how to personalize your startpage with <a href="https://github.com/firatusta/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/firatusta/aura/blob/main/Docs/templates.md">pre-made themes</a>.
 
 <h2> Planned Features </h2>
 
