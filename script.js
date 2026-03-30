@@ -809,13 +809,13 @@ const topBar = (() => {
     const _rearrange = function () {
         switch(visibleWidgetCount){
             case 1:
-                topBarDiv.style.gridTemplateColumns = "0 0 100% 0 0";
+                topBarDiv.style.gridTemplateColumns = "0 0 1fr 0 0";
                 topBarDiv.style.gridTemplateAreas = '"second fDivider first sDivider third"';
                 firstDivider.innerText = "";
                 secondDivider.innerText = "";
                 break;
             case 2:
-                topBarDiv.style.gridTemplateColumns = "50% 0 0 0 50%";
+                topBarDiv.style.gridTemplateColumns = "1fr 0 0 0 1fr";
                 topBarDiv.style.gridTemplateAreas = '"first fDivider third sDivider second"';
                 firstDivider.innerText = "";
                 secondDivider.innerText = "";
