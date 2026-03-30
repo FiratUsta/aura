@@ -19,8 +19,8 @@ input, textarea, select {
     --background: #000;
     --foreground: #fff;
     --accent-one: #d6d6d6;
-    --background-image: ;
-    --background-blur: ;
+    --background-image: none;
+    --background-blur: 0;
 }
 ::selection{
     color: var(--background);
