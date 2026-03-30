@@ -287,6 +287,30 @@ Usage:
 
     ic
 
+### `image-background-set || ibs`
+
+Changes the background image of dark or light mode to an image from the given URL, depending on the mode you're currently on.
+
+Usage:
+
+    ibs <image URL>
+
+### `image-background-clear || ibc`
+
+Sets the background image for both dark and light modes back to the default image.
+
+Usage:
+
+    ibc
+
+### `image-background-blur || ibb`
+
+Sets the blur strength of the background image.
+
+Usage:
+
+    ibb
+
 ## Other Theming Commands
 
 This section contains commands that deal with various theming options that do not fit
