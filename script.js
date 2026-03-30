@@ -821,7 +821,7 @@ const topBar = (() => {
                 secondDivider.innerText = "";
                 break;
             case 3:
-                topBarDiv.style.gridTemplateColumns = "32% 2% 32% 2% 32%";
+                topBarDiv.style.gridTemplateColumns = "1fr auto 1fr auto 1fr";
                 topBarDiv.style.gridTemplateAreas = '"first fDivider second sDivider third"';
                 firstDivider.innerText = "|";
                 secondDivider.innerText = "|";
