@@ -26,10 +26,13 @@ let settings = {
     "foreground": "#fff",
     "accent": "#d6d6d6",
     "image": "Assets/default.jpg",
+    "imageBackground": "",
     "lmBackground": "#fff",
     "lmForeground": "#000",
     "lmAccent": "#d6d6d6",
     "lmImage": "Assets/defaultLight.jpg",
+    "lmImageBackground": "",
+    "backgroundBlur": "",
     "currentMode": "dark",
     "autoLightBegin": "0600",
     "autoLightEnd": "1800",
@@ -562,6 +565,40 @@ const searchLogic = (() => {
                         settings["lmImage"] = "Assets/defaultLight.jpg";
                         DOMLogic.refresh();
                         break;
+
+                    case "image-background-set":
+                    case "ibs":
+                        if(commandList.length === 2){
+                            if(settings["currentMode"] === "dark"){
+                                settings["imageBackground"] = commandList[1];
+                            }
+                            else{
+                                settings["lmImageBackground"] = commandList[1];
+                            };
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[ibs || image-background-set] <image URL>"'
+                        }
+                        break;
+
+                    case "image-background-blur":
+                    case "ibb":
+                        if(commandList.length === 2){
+                            settings["backgroundBlur"] = commandList[1]
+                            DOMLogic.refresh();
+                        }
+                        else{
+                            errorMessage = 'Usage: "au:[ibb || image-background-blur] <int>"'
+                        }
+                        break;
+
+                    case "image-background-clear":
+                    case "ibc":
+                        settings["imageBackground"] = "";
+                        settings["lmImageBackground"] = "";
+                        DOMLogic.refresh();
+                        break;
                     
                     case "darkmode":
                     case "dm":
@@ -998,13 +1035,18 @@ const DOMLogic = (() => {
             document.documentElement.style.setProperty("--background", settings["background"]);
             document.documentElement.style.setProperty("--foreground", settings["foreground"]);
             document.documentElement.style.setProperty("--accent-one", settings["accent"]);
+            document.documentElement.style.setProperty("--background-image", "url(" + settings["imageBackground"] + ")");
             imageElement.setAttribute("src",settings["image"]);
         }
         else{
             document.documentElement.style.setProperty("--background", settings["lmBackground"]);
             document.documentElement.style.setProperty("--foreground", settings["lmForeground"]);
             document.documentElement.style.setProperty("--accent-one", settings["lmAccent"]);
+            document.documentElement.style.setProperty("--background-image", "url(" + settings["lmImageBackground"] + ")");
             imageElement.setAttribute("src",settings["lmImage"]);
+        }
+        if(settings["backgroundBlur"] != ""){
+            document.documentElement.style.setProperty("--background-blur", settings["backgroundBlur"]);
         }
         // Set searchbar placeholder
         searchBar.setAttribute("placeholder",settings["searchbarPlaceholder"])
@@ -1155,6 +1197,15 @@ const settingsLogic = (() => {
             theme["lmForeground"] = settings["lmForeground"];
             theme["lmAccent"] = settings["lmAccent"];
             theme["lmImage"] = settings["lmImage"];
+            if(settings["imageBackground"] != ""){
+                theme["imageBackground"] = settings["imageBackground"];
+            }
+            if(settings["lmImageBackground"] != ""){
+                theme["lmImageBackground"] = settings["lmImageBackground"];
+            }
+            if(settings["backgroundBlur"] != ""){
+                theme["backgroundBlur"] = settings["backgroundBlur"];
+            }
             settingsField.value = JSON.stringify(theme);
         }
         else{
