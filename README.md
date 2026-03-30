@@ -19,16 +19,6 @@ To start using Aura, head over to the live page and set it as your homepage/new 
 Learn how to customize your link list with <a href="https://github.com/firatusta/aura/blob/main/Docs/commands.md#link-list-commands">the documentation</a>.
 
 Learn how to personalize your startpage with <a href="https://github.com/firatusta/aura/blob/main/Docs/commands.md#theming">the documentation</a> or use one of the <a href="https://github.com/firatusta/aura/blob/main/Docs/templates.md">pre-made themes</a>.
-
-<h2> Planned Features </h2>
-
-* More customization options.
-  * Allow the customization of the corner decorations (change shape, hide/show etc.).
-  * More display image options (ability to position the image inside the display, filters etc.)
-* Improved functionality.
-  * Better command feedback.
-* GUI settings.
-  * GUI settings may be implemented after all other planned features are implemented.
   
 <h2>Known Bugs</h2>
 
