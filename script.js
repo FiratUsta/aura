@@ -167,7 +167,7 @@ const searchLogic = (() => {
                                     errorMessage = "Invalid component argument.";
                                     break;
                             };
-                            if(components === []){
+                            if(components.length === 0){
                                 break;
                             }
                             else{
@@ -1035,20 +1035,20 @@ const DOMLogic = (() => {
         return "There's nothing to remove."
     };
 
-    const setLink = function (index, component, arguments) {
+    const setLink = function (index, component, args) {
         if(isBetween(index,0,links.length)){
             switch(component){
                 case "a":
-                    if(arguments.length === 2 && arguments[0] !== ""){
-                        links[index-1] = arguments;
+                    if(args.length === 2 && args[0] !== ""){
+                        links[index-1] = args;
                         break;
                     }
                     return "A display name and a link must be supplied.";
                 case "n":
-                    links[index-1][0] = arguments;
+                    links[index-1][0] = args;
                     break;
                 case "u":
-                    links[index-1][1] = arguments;
+                    links[index-1][1] = args;
                     break;
             }
             refresh();
